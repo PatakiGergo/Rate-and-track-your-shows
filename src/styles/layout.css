@@ -1,0 +1,32 @@
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 9fr;
+}
+
+.navbar {
+  border-right: 1px solid black;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-items button {
+  margin: 10px;
+  font-size: 20px;
+  padding: 15px;
+  border: none;
+  font-weight: 700;
+  background: none;
+  border-radius: 10%;
+  transition: all 50ms ease-in-out;
+}
+
+.menu-items button:hover {
+  font-size: 22px;
+  padding: 13px;
+  cursor: pointer;
+  color: #5680e9;
+  box-shadow: 5px 5px 40px 0 rgb(255 0 0 / 10%);
+}
