@@ -1,6 +1,7 @@
 import Searchbar from "@/Components/Searchbar";
 import SearchResultCard from "@/Components/Search-result-card";
 import React from "react";
+import HotCard from "@/Components/HotCard";
 
 export default function Search() {
   const [results, setResults] = React.useState([]);
@@ -36,6 +37,10 @@ export default function Search() {
     <div className="search-main">
       <Searchbar handleSearch={searching}></Searchbar>
       {resultArr}
+      <div>
+        <h1>Currently hot:</h1>
+        <HotCard></HotCard>
+      </div>
     </div>
   );
 }
