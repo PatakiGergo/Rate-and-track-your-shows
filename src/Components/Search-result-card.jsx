@@ -41,6 +41,7 @@ export default function SearchResultCard(props) {
                 <Form
                   name={props.name}
                   imdbID={props.imdbID}
+                  img={props.image}
                   handleModal={handleToplist}
                 />
               </div>

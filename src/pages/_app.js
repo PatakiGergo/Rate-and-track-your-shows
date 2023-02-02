@@ -5,6 +5,7 @@ import "@/styles/searchcard.css";
 import "@/styles/searchbar.css";
 import "@/styles/search-main.css";
 import "@/styles/form.css";
+import "@/styles/toplist-card.css";
 import WatchlistContext from "@/context/watchlist-context";
 import toplistContext from "@/context/toplist-context";
 import ToplistContext from "@/context/toplist-context";

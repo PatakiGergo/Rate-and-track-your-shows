@@ -11,7 +11,18 @@ export default function ToplistForm(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    toplistContext.addMovie(props.name, props.imdbID, data);
+    console.log("ez a data", data);
+    const userReview = {
+      ...data,
+      overall_user_score:
+        (Number(data.plot) +
+          Number(data.music) +
+          Number(data.characters) +
+          Number(data.acting) +
+          Number(data.overall_experience)) /
+        5,
+    };
+    toplistContext.addMovie(props.name, props.imdbID, props.img, userReview);
     props.handleModal();
     console.log(data);
   };

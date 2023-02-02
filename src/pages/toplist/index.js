@@ -16,14 +16,19 @@ export default function Toplist() {
           title={item.title}
           imdbID={item.id}
           data={item.review}
+          img={item.img}
         />
       </>
     );
   });
 
   return (
-    <div>
-      <Sorting items={toplistItemsArr}></Sorting>
+    <div className="toplist-item-container">
+      <div className="toplist-header">
+        <h1>Your current toplist:</h1>
+        <Sorting items={toplistItemsArr}></Sorting>
+      </div>
+
       {toplistItemsArr}
     </div>
   );
