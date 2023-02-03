@@ -6,17 +6,20 @@ import "@/styles/searchbar.css";
 import "@/styles/search-main.css";
 import "@/styles/form.css";
 import "@/styles/toplist-card.css";
+import "@/styles/hot-card.css";
 import WatchlistContext from "@/context/watchlist-context";
-import toplistContext from "@/context/toplist-context";
 import ToplistContext from "@/context/toplist-context";
+import TracklistContext from "@/context/tracklist-context";
 
 export default function App({ Component, pageProps }) {
   return (
     <ToplistContext>
       <WatchlistContext>
-        <Sidebar>
-          <Component {...pageProps} />
-        </Sidebar>
+        <TracklistContext>
+          <Sidebar>
+            <Component {...pageProps} />
+          </Sidebar>
+        </TracklistContext>
       </WatchlistContext>
     </ToplistContext>
   );

@@ -4,12 +4,14 @@ import { WatchlistContext } from "@/context/watchlist-context";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ToplistContext } from "@/context/toplist-context";
-import Form from "./ToplistForm";
+import ToplistForm from "./ToplistForm";
+import TracklistForm from "./TracklistForm";
 
 export default function SearchResultCard(props) {
   const watchlistContext = useContext(WatchlistContext);
   const toplistContext = useContext(ToplistContext);
   const [showModal, setShowModal] = useState(false);
+  const [showTrackModal, setTrackModal] = useState(false);
 
   function watchlistHandler() {
     watchlistContext.addMovie(props.name, props.imdbID);
@@ -27,9 +29,31 @@ export default function SearchResultCard(props) {
     setShowModal(!showModal);
   }
 
+  function handleTrack() {
+    console.log("button clicked");
+    setTrackModal(!showTrackModal);
+  }
+
+  function handleTrackClose() {
+    setTrackModal(!showTrackModal);
+  }
+
   return (
     <>
       <div className="container">
+        {showTrackModal && (
+          <>
+            <Backdrop
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={showTrackModal}
+              onClick={handleTrackClose}
+            >
+              <div onClick={(e) => e.stopPropagation()}>
+                <TracklistForm show={props.name} />
+              </div>
+            </Backdrop>
+          </>
+        )}
         {showModal && (
           <>
             <Backdrop
@@ -38,7 +62,7 @@ export default function SearchResultCard(props) {
               onClick={handleClose}
             >
               <div onClick={(e) => e.stopPropagation()}>
-                <Form
+                <ToplistForm
                   name={props.name}
                   imdbID={props.imdbID}
                   img={props.image}
@@ -61,7 +85,7 @@ export default function SearchResultCard(props) {
         </div>
         <div>
           <button onClick={watchlistHandler}>Watchlist</button>
-          <button>Track</button>
+          <button onClick={handleTrack}>Track</button>
           <button onClick={handleToplist}>Add to toplist</button>
         </div>
       </div>

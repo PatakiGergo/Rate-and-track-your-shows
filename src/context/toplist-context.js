@@ -37,7 +37,9 @@ export default (props) => {
         console.log("lowtohigh");
         setToplist((current) => {
           const sortedArr = [...current].sort(
-            (a, b) => Number(b.review.plot) - Number(a.review.plot)
+            (a, b) =>
+              Number(a.review.overall_user_score) -
+              Number(b.review.overall_user_score)
           );
           return sortedArr;
         });
@@ -46,7 +48,9 @@ export default (props) => {
         console.log("hightolow");
         setToplist((current) => {
           const sortedArr = [...current].sort(
-            (a, b) => Number(a.review.plot) - Number(b.review.plot)
+            (a, b) =>
+              Number(b.review.overall_user_score) -
+              Number(a.review.overall_user_score)
           );
           return sortedArr;
         });

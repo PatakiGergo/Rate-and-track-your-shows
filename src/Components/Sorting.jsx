@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,13 +14,15 @@ export default function BasicSelect() {
 
   const handleChange = (event) => {
     setSorting(event.target.value);
-    toplistItemsArr.sortItems(sorting);
   };
+
+  useEffect(() => {
+    toplistItemsArr.sortItems(sorting);
+  }, [sorting]);
 
   return (
     <Box sx={{ maxWidth: 140 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Sort by:</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -27,6 +30,7 @@ export default function BasicSelect() {
           label="Age"
           onChange={handleChange}
         >
+          <MenuItem value={"sort"}>Sort by: </MenuItem>
           <MenuItem value={"lowToHigh"}>Rating: Low to high</MenuItem>
           <MenuItem value={"highToLow"}>Rating: High to low</MenuItem>
           <MenuItem value={"Old"}>Addition time: Old</MenuItem>

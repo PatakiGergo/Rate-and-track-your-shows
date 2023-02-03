@@ -39,7 +39,12 @@ export default function Search() {
       {resultArr}
       <div>
         <h1>Currently hot:</h1>
-        <HotCard></HotCard>
+        <div className="hot-cards-container">
+          <HotCard></HotCard>
+          <HotCard></HotCard>
+          <HotCard></HotCard>
+          <HotCard></HotCard>
+        </div>
       </div>
     </div>
   );

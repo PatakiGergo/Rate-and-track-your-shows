@@ -42,8 +42,9 @@ export default function ToplistCard(props) {
         <h3>Liked {props.data.liked} </h3>
 
         {/* <h3>Recommendation {props.data.recommendation} </h3> */}
-        <button onClick={deleteHandler}>Delete</button>
       </div>
+      <button onClick={deleteHandler}>Delete</button>
+      
     </div>
   );
 }

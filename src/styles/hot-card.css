@@ -1,0 +1,19 @@
+.hot-card-container img {
+  width: 100%;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.hot-card-container {
+  width: 30%;
+}
+
+.hot-description {
+  color: white;
+  background-color: green;
+}
+
+.hot-card-container button {
+  padding: 10px;
+  cursor: pointer;
+}
