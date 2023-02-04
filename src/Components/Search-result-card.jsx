@@ -49,7 +49,7 @@ export default function SearchResultCard(props) {
               onClick={handleTrackClose}
             >
               <div onClick={(e) => e.stopPropagation()}>
-                <TracklistForm show={props.name} />
+                <TracklistForm show={props.name} handleModal={handleTrack} />
               </div>
             </Backdrop>
           </>

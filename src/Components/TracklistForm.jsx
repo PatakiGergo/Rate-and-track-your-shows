@@ -9,10 +9,14 @@ import { TracklistContext } from "@/context/tracklist-context";
 import SeasonAndEpisode from "./SeasonAndEpisode";
 
 export default function TracklistForm(props) {
+  const tracklist = useContext(TracklistContext);
   const [show, setShow] = useState("wednesday");
   const [episodeData, setEpisodeData] = useState({
     name: "asd",
     image: "image.medium",
+    externals: {
+      imdb: "ttakarmi",
+    },
     _embedded: {
       episodes: [{ name: "Pilot", season: 3, number: 1 }],
     },
@@ -51,19 +55,26 @@ export default function TracklistForm(props) {
 
   const onSubmit = (data) => {
     console.log("ez a data", data);
+    //a data a user progress
+    tracklist.addMovie(
+      episodeData.name,
+      episodeData.externals.imdb,
+      episodeData._embedded.episodes
+    );
+    props.handleModal();
   };
 
   return (
     <>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <h1>{episodeData.name} </h1>
-        <label htmlFor="">Plot</label>
-        <input
+       {/*  <h1>{episodeData.name} </h1>
+        <label htmlFor="">Plot</label> */}
+      {/*   <input
           type="range"
           placeholder="Plot"
           {...register("plot", { required: true, max: 100, min: 1 })}
-        />
-        {episodes}
+        /> */}
+       {/*  {episodes} */}
         <input type="submit" />
       </form>
     </>
