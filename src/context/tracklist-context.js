@@ -4,6 +4,7 @@ export const TracklistContext = React.createContext({
   tracklistItems: [],
   addMovie: (id) => {},
   remove: (id) => {},
+  handleProgress: (id) => {},
 
   sortItems: (sortBy) => {},
 });
@@ -19,24 +20,30 @@ export default (props) => {
         {
           season: 0,
           episode: 2,
+          seen: false,
         },
       ],
       dataOfUserProgress: {},
     },
   ]);
 
-  function addToTracklist(name, id, episodes, img, dataOfUserProgress) {
+  function addToTracklist(name, id, episodes, img) {
     setTracklist((current) => {
       if (current.some((item) => item.title === name)) {
-        alert("this is already on your toplist");
+        alert("this is already on your tracklist");
         return [...current];
       } else {
         console.log("Current", ...current);
-        return [
-          ...current,
-          { title: name, id, episodes, img, dataOfUserProgress },
-        ];
+        episodes.seasonSeen = false;
+        return [...current, { title: name, id, episodes, img }];
       }
+    });
+  }
+
+  //removing movies from tracklist
+  function removeMovieFromTracklist(id) {
+    setTracklist((current) => {
+      return current.filter((item) => item.id !== id);
     });
   }
 
@@ -45,6 +52,7 @@ export default (props) => {
       value={{
         tracklistItems: tracklist,
         addMovie: addToTracklist,
+        remove: removeMovieFromTracklist,
       }}
     >
       {props.children}

@@ -1,14 +1,9 @@
 import React, { useContext } from "react";
-import { ToplistContext } from "@/context/toplist-context";
+
+import RemoveButton from "./Buttons/RemoveButton";
 
 export default function ToplistCard(props) {
-  const toplistContext = useContext(ToplistContext);
-
-  console.log(props.data);
-
-  function deleteHandler() {
-    toplistContext.remove(props.imdbID);
-  }
+  const imdbId = props.imdbID;
 
   return (
     <div className="toplist-card">
@@ -43,8 +38,7 @@ export default function ToplistCard(props) {
 
         {/* <h3>Recommendation {props.data.recommendation} </h3> */}
       </div>
-      <button onClick={deleteHandler}>Delete</button>
-      
+      <RemoveButton type={"toplist-delete"} id={imdbId} />
     </div>
   );
 }

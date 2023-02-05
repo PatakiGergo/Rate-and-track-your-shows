@@ -1,18 +1,16 @@
 import React, { useContext, useState } from "react";
 import { WatchlistContext } from "@/context/watchlist-context";
+import RemoveButton from "./Buttons/RemoveButton";
 
 export default function WatchlistCard(props) {
-  const watchlistContext = React.useContext(WatchlistContext);
-
-  function deleteHandler() {
-    watchlistContext.remove(props.imdbID);
-  }
+  const id = props.imdbID;
 
   return (
     <div>
       <h1>{props.title} </h1>
       <h2>{props.imdbID} </h2>
-      <button onClick={deleteHandler}>Delete</button>
+
+      <RemoveButton type={"watchlist-delete"} id={id} />
     </div>
   );
 }
