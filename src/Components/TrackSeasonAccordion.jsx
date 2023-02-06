@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -6,14 +7,60 @@ import TrackEpisodeAccordion from "./TrackEpisodeAccordion";
 
 export default function TrackSeasonAccordion(props) {
   const episodes = props.episodes;
- 
+
   const season = props.season;
   const episodeAccordion = [
     <TrackEpisodeAccordion season={props.season} key={"placeholder"} />,
   ];
 
   const seasonEpisodes = [];
-  const wholeSeason = props.wholeSeason;
+  const wholeSeries = props.wholeSeries;
+
+  const [idsOfSeen, setId] = useState([]);
+  const [seenSeason, setSeenSeason] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  function seenHandler(seriesid) {
+    if (idsOfSeen.includes(seriesid)) {
+      setId((prev) => {
+        setProgress((prevProgress) => prevProgress - 1);
+        return prev.filter((item) => item != seriesid);
+      });
+    } else {
+      setId((prev) => [...prev, seriesid]);
+      setProgress((prevProgress) => prevProgress + 1);
+    }
+  }
+
+  props.progressHandler(progress);
+
+  if (idsOfSeen.length === episodes.length && !seenSeason) {
+    setSeenSeason(true);
+    setId(
+      episodes.map((episode) => {
+        if (episode.season === season) {
+          return episode.id;
+        }
+      })
+    );
+  }
+
+  function seasonSeenHandler(e) {
+    e.stopPropagation();
+    if (idsOfSeen.length === episodes.length) {
+      setId([]);
+      setSeenSeason(false);
+    } else {
+      setSeenSeason(true);
+      setId(
+        episodes.map((episode) => {
+          if (episode.season === season) {
+            return episode.id;
+          }
+        })
+      );
+    }
+  }
 
   episodes.forEach((episode) => {
     if (episode.season === season) {
@@ -24,7 +71,12 @@ export default function TrackSeasonAccordion(props) {
           episode={episode.name}
           summary={episode.summary}
           data={episode}
-          wholeSeason={wholeSeason}
+          wholeSeries={wholeSeries}
+          title={props.title}
+          seen={idsOfSeen.includes(episode.id)}
+          seenHandler={seenHandler}
+          seenSeason={seenSeason}
+          seenEpisode={episode.seen}
         />
       );
     }
@@ -34,7 +86,11 @@ export default function TrackSeasonAccordion(props) {
     <div>
       <Accordion>
         <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-          <input type="checkbox" onClick={(e) => e.stopPropagation()} />
+          <input
+            type="checkbox"
+            onClick={seasonSeenHandler}
+            checked={seenSeason}
+          />
           <Typography>
             {props.title} Season {props.season} accordion
           </Typography>

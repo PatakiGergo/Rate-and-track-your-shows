@@ -5,7 +5,7 @@ export default function Searchbar(props) {
 
   function inputHandler(e) {
     setSearchState(e.target.value);
-    console.log(searchState);
+    
   }
 
   function searchHandler(e) {

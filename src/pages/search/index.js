@@ -29,7 +29,7 @@ export default function Search() {
       .then((res) => res.json())
       .then((data) => {
         setResults(data);
-        console.log(data);
+       
       });
   }
 

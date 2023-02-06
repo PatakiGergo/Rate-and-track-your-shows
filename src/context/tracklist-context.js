@@ -4,9 +4,9 @@ export const TracklistContext = React.createContext({
   tracklistItems: [],
   addMovie: (id) => {},
   remove: (id) => {},
-  handleProgress: (id) => {},
 
   sortItems: (sortBy) => {},
+  calculateProgress: (title) => {},
 });
 
 // eslint-disable-next-line react/display-name, import/no-anonymous-default-export
@@ -23,19 +23,21 @@ export default (props) => {
           seen: false,
         },
       ],
-      dataOfUserProgress: {},
+      dataOfUserProgress: 5,
     },
   ]);
 
-  function addToTracklist(name, id, episodes, img) {
+  function addToTracklist(name, id, episodes, img, dataOfUserProgress) {
     setTracklist((current) => {
       if (current.some((item) => item.title === name)) {
         alert("this is already on your tracklist");
         return [...current];
       } else {
-        console.log("Current", ...current);
         episodes.seasonSeen = false;
-        return [...current, { title: name, id, episodes, img }];
+        return [
+          ...current,
+          { title: name, id, episodes, img, dataOfUserProgress },
+        ];
       }
     });
   }
@@ -47,12 +49,28 @@ export default (props) => {
     });
   }
 
+  /////// NOTE TO SELF_ DO IT WITH NUMBERS ON THE SEASON COMPONENT THEN CALCULATE IN PROGRESS WITH ALL SEASON ELEMENTS INSTEAD OF THIS:
+  function calculateProgress(name) {
+    let seenEpisodes = 0;
+    tracklist.map((series) => {
+      if (series.title === name) {
+        series.episodes.map((episode) => {
+          if (episode.seen) {
+            seenEpisodes++;
+          }
+        });
+      }
+    });
+    return seenEpisodes;
+  }
+
   return (
     <TracklistContext.Provider
       value={{
         tracklistItems: tracklist,
         addMovie: addToTracklist,
         remove: removeMovieFromTracklist,
+        calculateProgress: calculateProgress,
       }}
     >
       {props.children}

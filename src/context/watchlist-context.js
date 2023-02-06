@@ -17,7 +17,7 @@ export default (props) => {
         alert("this is already on your list");
         return [...current];
       } else {
-        console.log("Current", ...current);
+       
         return [...current, { title: name, id }];
       }
     });
@@ -30,7 +30,7 @@ export default (props) => {
     });
   }
 
-  console.log(watchlist);
+ 
 
   return (
     <WatchlistContext.Provider

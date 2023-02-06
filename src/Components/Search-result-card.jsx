@@ -30,7 +30,7 @@ export default function SearchResultCard(props) {
   }
 
   function handleTrack() {
-    console.log("button clicked");
+    
     setTrackModal(!showTrackModal);
   }
 

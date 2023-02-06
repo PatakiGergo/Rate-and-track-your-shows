@@ -12,7 +12,7 @@ export default function RemoveButton(props) {
   function reducer(state, action) {
     switch (action.type) {
       case "tracklist-delete":
-        console.log("id from button", props.id);
+       
         tracklistContext.remove(props.id);
         break;
       case "watchlist-delete":

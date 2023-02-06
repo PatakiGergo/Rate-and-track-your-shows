@@ -11,7 +11,7 @@ export default function ToplistForm(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log("ez a data", data);
+   
     const userReview = {
       ...data,
       overall_user_score:
@@ -24,9 +24,9 @@ export default function ToplistForm(props) {
     };
     toplistContext.addMovie(props.name, props.imdbID, props.img, userReview);
     props.handleModal();
-    console.log(data);
+    
   };
-  console.log(errors);
+ 
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>

@@ -45,7 +45,7 @@ export default function TracklistForm(props) {
     );
   }, [show]);
 
-  console.log(episodeData);
+ 
 
   const {
     register,
@@ -54,7 +54,7 @@ export default function TracklistForm(props) {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("ez a data", data);
+   
     //a data a user progress
     tracklist.addMovie(
       episodeData.name,

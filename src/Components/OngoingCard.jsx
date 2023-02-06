@@ -6,6 +6,7 @@ import TrackSeasonAccordion from "./TrackSeasonAccordion";
 import RemoveButton from "./Buttons/RemoveButton";
 
 export default function OngoingCard(props) {
+  const [progress, setProgress] = useState(0);
   const [seasonAccordions, setSeasonAccordions] = useState([
     <TrackSeasonAccordion key={"none"} />,
   ]);
@@ -18,6 +19,10 @@ export default function OngoingCard(props) {
   const seasonAccordionsArr = [];
   const id = props.imdbID;
 
+  function progressHandler(progress) {
+    setProgress(progress);
+  }
+
   for (let i = 0; i < seasonNumber; i++) {
     seasonAccordionsArr.push(
       <TrackSeasonAccordion
@@ -25,7 +30,8 @@ export default function OngoingCard(props) {
         season={i + 1}
         title={props.title}
         episodes={props.episodes}
-        wholeSeason={episodes}
+        wholeSeries={episodes}
+        progressHandler={progressHandler}
       />
     );
     if (i === seasonNumber) {
@@ -37,10 +43,9 @@ export default function OngoingCard(props) {
     <div>
       <h1>{props.title} </h1>
       {seasonAccordions && seasonAccordionsArr}
-      <div>
-        <ProgressBar></ProgressBar>
-      </div>
+      <div></div>
       <RemoveButton type={"tracklist-delete"} id={id} />
+      <ProgressBar title={props.title} progress={progress} />
     </div>
   );
 }
