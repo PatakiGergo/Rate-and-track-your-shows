@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
-import { TracklistContext } from "@/context/tracklist-context";
+import tracklistContext, {
+  TracklistContext,
+} from "@/context/tracklist-context";
 import ProgressBar from "./ProgressBar";
 
 import TrackSeasonAccordion from "./TrackSeasonAccordion";
 import RemoveButton from "./Buttons/RemoveButton";
 
 export default function OngoingCard(props) {
-  const [progress, setProgress] = useState(0);
   const [seasonAccordions, setSeasonAccordions] = useState([
     <TrackSeasonAccordion key={"none"} />,
   ]);
@@ -19,10 +20,6 @@ export default function OngoingCard(props) {
   const seasonAccordionsArr = [];
   const id = props.imdbID;
 
-  function progressHandler(progress) {
-    setProgress(progress);
-  }
-
   for (let i = 0; i < seasonNumber; i++) {
     seasonAccordionsArr.push(
       <TrackSeasonAccordion
@@ -31,13 +28,31 @@ export default function OngoingCard(props) {
         title={props.title}
         episodes={props.episodes}
         wholeSeries={episodes}
-        progressHandler={progressHandler}
       />
     );
     if (i === seasonNumber) {
       setSeasonAccordions(seasonAccordionsArr);
     }
   }
+  const progress = 5;
+
+  const episodeNumber = episodes.length;
+
+  function calculateProgress() {
+    let seenNumber = 0;
+    tracklist.tracklistItems.map((show) => {
+      if (show.title === props.title) {
+        show.episodes.map((episode) => {
+          if (tracklist.seenEpisodes.includes(episode)) {
+            seenNumber = seenNumber + 1;
+          }
+        });
+      }
+    });
+    return "ez a progress", seenNumber / episodeNumber;
+  }
+
+ 
 
   return (
     <div>
@@ -45,7 +60,7 @@ export default function OngoingCard(props) {
       {seasonAccordions && seasonAccordionsArr}
       <div></div>
       <RemoveButton type={"tracklist-delete"} id={id} />
-      <ProgressBar title={props.title} progress={progress} />
+      <ProgressBar title={props.title} progress={calculateProgress()} />
     </div>
   );
 }

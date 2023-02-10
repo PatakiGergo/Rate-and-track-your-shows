@@ -2,9 +2,10 @@ import React, { useState, useContext } from "react";
 
 export const TracklistContext = React.createContext({
   tracklistItems: [],
+  seenEpisodes: [],
   addMovie: (id) => {},
   remove: (id) => {},
-
+  handleSeen: (id, title) => {},
   sortItems: (sortBy) => {},
   calculateProgress: (title) => {},
 });
@@ -25,6 +26,10 @@ export default (props) => {
       ],
       dataOfUserProgress: 5,
     },
+  ]);
+
+  const [seenEpisodes, setSeenEpisodes] = useState([
+    { id: "asd", url: "kek", name: "aaa", season: 4, number: 5 },
   ]);
 
   function addToTracklist(name, id, episodes, img, dataOfUserProgress) {
@@ -49,6 +54,27 @@ export default (props) => {
     });
   }
 
+  function handleSeen(id, episodeTitle, showTitle) {
+    setTracklist((current) => {
+      current.map((show) => {
+        if (show.title === showTitle) {
+          show.episodes.map((episode) => {
+            if (episode.name === episodeTitle) {
+              if (seenEpisodes.includes(episode)) {
+                setSeenEpisodes((prev) => {
+                  return prev.filter((item) => item.name !== episode.name);
+                });
+              } else {
+                setSeenEpisodes((prev) => [...prev, episode]);
+              }
+            }
+          });
+        }
+      });
+      return current;
+    });
+  }
+
   /////// NOTE TO SELF_ DO IT WITH NUMBERS ON THE SEASON COMPONENT THEN CALCULATE IN PROGRESS WITH ALL SEASON ELEMENTS INSTEAD OF THIS:
   function calculateProgress(name) {
     let seenEpisodes = 0;
@@ -64,13 +90,17 @@ export default (props) => {
     return seenEpisodes;
   }
 
+  console.log(seenEpisodes);
+
   return (
     <TracklistContext.Provider
       value={{
         tracklistItems: tracklist,
+        seenEpisodes: seenEpisodes,
         addMovie: addToTracklist,
         remove: removeMovieFromTracklist,
         calculateProgress: calculateProgress,
+        handleSeen: handleSeen,
       }}
     >
       {props.children}

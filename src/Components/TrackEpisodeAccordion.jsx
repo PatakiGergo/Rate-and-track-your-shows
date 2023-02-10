@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -10,38 +10,12 @@ export default function TrackEpisodeAccordion(props) {
 
   //code duplicationt majd fixálni
 
-  tracklistContext.tracklistItems.forEach((item, i) => {
-    if (item.title === props.title) {
-      item.episodes.forEach((item, i) => {
-        if (
-          item.number === props.data.number &&
-          item.season === props.data.season
-        ) {
-          item.seen = props.seen;
-        }
-      });
-    }
-  });
+  const episode = "asd";
 
-  function checkBoxHandler(e) {
+  function handleClick(e) {
+    props.checkmarkHandler(props.id);
     e.stopPropagation();
-    props.seenHandler(props.data.id);
-
-    tracklistContext.tracklistItems.forEach((item, i) => {
-      if (item.title === props.title) {
-        item.episodes.forEach((item, i) => {
-          if (
-            item.number === props.data.number &&
-            item.season === props.data.season
-          ) {
-            item.seen = !item.seen;
-          }
-        });
-      }
-    });
   }
-
-  /* console.log(tracklistContext.calculateProgress(props.title)) */
 
   return (
     <>
@@ -49,13 +23,15 @@ export default function TrackEpisodeAccordion(props) {
         <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
           <input
             type="checkbox"
-            onClick={checkBoxHandler}
-            checked={props.seenEpisode}
-            disabled={props.seenSeason}
+            onClick={handleClick}
+            checked={
+              props.seasonSeen
+                ? true
+                : tracklistContext.seenEpisodes.includes(props.data)
+            }
+            disabled={props.seasonSeen}
           />
-          <Typography>
-            {props.episode} {props.seen ? "seen" : "not seen"}
-          </Typography>
+          <Typography>{props.episode}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>{props.summary} </Typography>
