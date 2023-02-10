@@ -1,6 +1,7 @@
 .toplist-item-container {
   display: flex;
   flex-direction: column;
+  max-width: 1200px;
 }
 
 .toplist-accordion {

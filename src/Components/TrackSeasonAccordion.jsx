@@ -31,6 +31,19 @@ export default function TrackSeasonAccordion(props) {
     });
   }
 
+  function seasonCheckmarkHandler(id) {
+    tracklistContext.tracklistItems.map((show) => {
+      if (show.title === props.title) {
+        show.episodes.map((episode) => {
+          if (episode.id === id) {
+            //ide contextes method
+            tracklistContext.handleSeenSeason(id, episode.name, show.title);
+          }
+        });
+      }
+    });
+  }
+
   const [seasonSeen, setWholeSeasonSeen] = useState(false);
 
   function setSeasonSeen(e) {
@@ -39,7 +52,7 @@ export default function TrackSeasonAccordion(props) {
       if (show.title === props.title) {
         show.episodes.map((episode) => {
           if (episode.season === props.season) {
-            episodeCheckmarkHandler(episode.id, e);
+            seasonCheckmarkHandler(episode.id, e);
             setWholeSeasonSeen(!seasonSeen);
           }
         });

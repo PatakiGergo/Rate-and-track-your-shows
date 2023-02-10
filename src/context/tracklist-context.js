@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo } from "react";
 
 export const TracklistContext = React.createContext({
   tracklistItems: [],
@@ -8,6 +8,7 @@ export const TracklistContext = React.createContext({
   handleSeen: (id, title) => {},
   sortItems: (sortBy) => {},
   calculateProgress: (title) => {},
+  handleSeenSeason: () => {},
 });
 
 // eslint-disable-next-line react/display-name, import/no-anonymous-default-export
@@ -54,26 +55,45 @@ export default (props) => {
     });
   }
 
-  function handleSeen(id, episodeTitle, showTitle) {
-    setTracklist((current) => {
-      current.map((show) => {
-        if (show.title === showTitle) {
-          show.episodes.map((episode) => {
-            if (episode.name === episodeTitle) {
-              if (seenEpisodes.includes(episode)) {
-                setSeenEpisodes((prev) => {
-                  return prev.filter((item) => item.name !== episode.name);
-                });
-              } else {
+  const handleSeen = useMemo(() => {
+    return function handleSeen(id, episodeTitle, showTitle) {
+      setTracklist((current) => {
+        current.map((show) => {
+          if (show.title === showTitle) {
+            show.episodes.map((episode) => {
+              if (episode.name === episodeTitle) {
+                if (seenEpisodes.includes(episode)) {
+                  setSeenEpisodes((prev) => {
+                    return prev.filter((item) => item.name !== episode.name);
+                  });
+                } else {
+                  setSeenEpisodes((prev) => [...prev, episode]);
+                }
+              }
+            });
+          }
+        });
+        return current;
+      });
+    };
+  }, [seenEpisodes, setSeenEpisodes, setTracklist]);
+
+  const handleSeenSeason = useMemo(() => {
+    return function handleSeenSeason(id, episodeTitle, showTitle) {
+      setTracklist((current) => {
+        current.map((show) => {
+          if (show.title === showTitle) {
+            show.episodes.map((episode) => {
+              if (episode.name === episodeTitle) {
                 setSeenEpisodes((prev) => [...prev, episode]);
               }
-            }
-          });
-        }
+            });
+          }
+        });
+        return current;
       });
-      return current;
-    });
-  }
+    };
+  }, [setSeenEpisodes, setTracklist]);
 
   /////// NOTE TO SELF_ DO IT WITH NUMBERS ON THE SEASON COMPONENT THEN CALCULATE IN PROGRESS WITH ALL SEASON ELEMENTS INSTEAD OF THIS:
   function calculateProgress(name) {
@@ -101,6 +121,7 @@ export default (props) => {
         remove: removeMovieFromTracklist,
         calculateProgress: calculateProgress,
         handleSeen: handleSeen,
+        handleSeenSeason: handleSeenSeason,
       }}
     >
       {props.children}

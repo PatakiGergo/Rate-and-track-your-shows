@@ -17,7 +17,9 @@ export default function App({ Component, pageProps }) {
       <WatchlistContext>
         <TracklistContext>
           <Sidebar>
-            <Component {...pageProps} />
+            <div className="main-container">
+              <Component {...pageProps} />
+            </div>
           </Sidebar>
         </TracklistContext>
       </WatchlistContext>
