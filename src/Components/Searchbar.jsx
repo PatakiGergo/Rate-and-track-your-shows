@@ -21,7 +21,7 @@ export default function Searchbar(props) {
         className="searchbar"
         placeholder="Enter show title..."
       />
-      <button>Search</button>
+      <button className="search-button">Search</button>
     </form>
   );
 }

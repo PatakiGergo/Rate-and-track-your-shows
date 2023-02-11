@@ -1,12 +1,9 @@
-//it needs to make a request using the tvmaze show api and it needs to be scrollable
 
-//which episode you currently at?
-//leave an option of did not start
 
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TracklistContext } from "@/context/tracklist-context";
-import SeasonAndEpisode from "./SeasonAndEpisode";
+
 
 export default function TracklistForm(props) {
   const tracklist = useContext(TracklistContext);
@@ -22,17 +19,6 @@ export default function TracklistForm(props) {
     },
   });
 
-  const episodes = episodeData._embedded.episodes.map((episode) => {
-    return (
-      <>
-        <SeasonAndEpisode
-          name={episode.name}
-          season={episode.season}
-          episode={episode.number}
-        ></SeasonAndEpisode>
-      </>
-    );
-  });
 
   useEffect(() => {
     fetch(
@@ -67,14 +53,6 @@ export default function TracklistForm(props) {
   return (
     <>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-       {/*  <h1>{episodeData.name} </h1>
-        <label htmlFor="">Plot</label> */}
-      {/*   <input
-          type="range"
-          placeholder="Plot"
-          {...register("plot", { required: true, max: 100, min: 1 })}
-        /> */}
-       {/*  {episodes} */}
         <input type="submit" />
       </form>
     </>

@@ -6,8 +6,6 @@ import Sorting from "@/Components/Sorting";
 export default function Toplist() {
   const toplist = useContext(ToplistContext).toplistItems;
 
- 
-
   const toplistItemsArr = toplist.map((item) => {
     return (
       <>
@@ -28,8 +26,7 @@ export default function Toplist() {
         <h1>Your current toplist:</h1>
         <Sorting items={toplistItemsArr}></Sorting>
       </div>
-
-      {toplistItemsArr}
+      <div className="toplist-items">{toplistItemsArr}</div>
     </div>
   );
 }

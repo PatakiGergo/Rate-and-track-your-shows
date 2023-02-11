@@ -7,7 +7,6 @@ export default function Tracklist(props) {
   const tracklist = useContext(TracklistContext).tracklistItems;
 
   const tracklistItems = tracklist.map((item) => {
-   
     return (
       <OngoingCard
         title={item.title}
@@ -18,5 +17,5 @@ export default function Tracklist(props) {
     );
   });
 
-  return <>{tracklistItems}</>;
+  return <div className="tracklist-container">{tracklistItems}</div>;
 }

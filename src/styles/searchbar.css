@@ -8,6 +8,20 @@
   margin-bottom: 10px;
   border: 2px solid black;
   align-self: flex-start;
+  font-weight: 700;
+}
 
- 
+.search-button {
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: 700;
+  border: 2px solid black;
+  cursor: pointer;
+  margin-left: 5px;
+  background-color: white;
+  transition: all 300ms;
+}
+
+.search-button:hover {
+  background-color: rgba(0, 0, 0, 0.034);
 }

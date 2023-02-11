@@ -6,6 +6,7 @@ import ProgressBar from "./ProgressBar";
 
 import TrackSeasonAccordion from "./TrackSeasonAccordion";
 import RemoveButton from "./Buttons/RemoveButton";
+import AddToToplistButton from "./Buttons/AddToToplist";
 
 export default function OngoingCard(props) {
   const [seasonAccordions, setSeasonAccordions] = useState([
@@ -58,6 +59,7 @@ export default function OngoingCard(props) {
       {seasonAccordions && seasonAccordionsArr}
       <div></div>
       <RemoveButton type={"tracklist-delete"} id={id} />
+      <AddToToplistButton name={props.title}></AddToToplistButton>
       <ProgressBar title={props.title} progress={calculateProgress()} />
     </div>
   );

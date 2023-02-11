@@ -32,6 +32,11 @@ const openedMixin = (theme) => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
+  overflowY: "hidden",
+  position: "fixed",
+  left: 0,
+  zIndex: 5,
+  backgroundColor: "black",
 });
 
 const closedMixin = (theme) => ({
@@ -40,6 +45,10 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
+  overflowY: "hidden",
+  backgroundColor: "black",
+  position: "fixed",
+  zIndex: 5,
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
@@ -50,6 +59,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
+  backgroundColor: "black",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
@@ -76,10 +86,12 @@ const AppBar = styled(MuiAppBar, {
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
-  width: drawerWidth,
+  width: 0,
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
+  backgroundColor: "black",
+
   ...(open && {
     ...openedMixin(theme),
     "& .MuiDrawer-paper": openedMixin(theme),
@@ -104,29 +116,66 @@ export default function MiniDrawer(props) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
+      <CssBaseline
+        sx={{
+          color: "black",
+        }}
+      />
+      <AppBar
+        position="fixed"
+        open={open}
+        sx={{
+          backgroundColor: "black",
+        }}
+      >
+        <Toolbar
+          sx={{
+            backgroundColor: "black",
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
+              color: "white",
+              backgroundColor: "black",
               marginRight: 5,
               ...(open && { display: "none" }),
             }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              color: "white",
+            }}
+          >
             Rate and Track your shows
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+      <Drawer
+        variant="permanent"
+        open={open}
+        sx={{
+          color: "white",
+          backgroundColor: "black",
+        }}
+      >
+        <DrawerHeader
+          sx={{
+            //ez a bal felső
+            backgroundColor: "black",
+            color: "white",
+          }}
+        >
+          <Typography>My movie app</Typography>
+          <IconButton onClick={handleDrawerClose} sx={{ color: "white" }}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
@@ -135,7 +184,12 @@ export default function MiniDrawer(props) {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List
+          sx={{
+            backgroundColor: "black",
+            color: "white",
+          }}
+        >
           <ListItem disablePadding sx={{ display: "block" }}>
             <Link href="./">
               <ListItemButton
@@ -150,13 +204,18 @@ export default function MiniDrawer(props) {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    color: "white",
                   }}
                 >
                   <HomeOutlinedIcon></HomeOutlinedIcon>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Homepage"}
-                  sx={{ opacity: open ? 1 : 0 }}
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    color: "white",
+                    backgroundColor: "black",
+                  }}
                 />
               </ListItemButton>
             </Link>
@@ -168,6 +227,7 @@ export default function MiniDrawer(props) {
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
+                  color: "white",
                 }}
               >
                 <ListItemIcon
@@ -175,6 +235,7 @@ export default function MiniDrawer(props) {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    color: "white",
                   }}
                 >
                   <LeaderboardOutlinedIcon></LeaderboardOutlinedIcon>
@@ -193,6 +254,7 @@ export default function MiniDrawer(props) {
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
+                  color: "white",
                 }}
               >
                 <ListItemIcon
@@ -200,6 +262,7 @@ export default function MiniDrawer(props) {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    color: "white",
                   }}
                 >
                   <HourglassEmptyOutlined />
@@ -218,6 +281,7 @@ export default function MiniDrawer(props) {
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
+                  color: "white",
                 }}
               >
                 <ListItemIcon
@@ -225,6 +289,7 @@ export default function MiniDrawer(props) {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    color: "white",
                   }}
                 >
                   <RemoveRedEyeOutlinedIcon></RemoveRedEyeOutlinedIcon>
@@ -243,6 +308,7 @@ export default function MiniDrawer(props) {
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
+                  color: "white",
                 }}
               >
                 <ListItemIcon
@@ -250,6 +316,7 @@ export default function MiniDrawer(props) {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    color: "white",
                   }}
                 >
                   <SearchOutlinedIcon />
