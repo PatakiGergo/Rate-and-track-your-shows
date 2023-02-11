@@ -2,8 +2,12 @@
   padding: 15px;
   border-radius: 10px;
   font-size: 15px;
-  margin-top: 40px;
+  margin-top: 20px;
   cursor: pointer;
   width: 500px;
   margin-bottom: 10px;
+  border: 2px solid black;
+  align-self: flex-start;
+
+ 
 }

@@ -27,6 +27,13 @@ a {
 
 .main-container {
   margin-top: 65px;
-  width: 1200px;
-  background-color: aqua;
+  width: 100%;
+  background-color: rgb(212, 209, 209);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home {
+  width: 100%;
 }

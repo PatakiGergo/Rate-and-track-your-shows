@@ -7,6 +7,7 @@ export default function Search() {
   const [results, setResults] = React.useState([]);
 
   const resultArr = results.map((item) => {
+    console.log(item);
     return (
       <SearchResultCard
         name={item.show.name}
@@ -19,6 +20,8 @@ export default function Search() {
         imdbID={
           item.show.externals.imdb ? item.show.externals.imdb : item.show.id
         }
+        description={item.show.summary}
+        genres={item.show.genres}
       />
     );
   });
@@ -29,7 +32,6 @@ export default function Search() {
       .then((res) => res.json())
       .then((data) => {
         setResults(data);
-       
       });
   }
 

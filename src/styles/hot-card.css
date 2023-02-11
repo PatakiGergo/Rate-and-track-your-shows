@@ -8,6 +8,10 @@
   width: 30%;
 }
 
+.hot-cards-container {
+  display: flex;
+}
+
 .hot-description {
   color: white;
   background-color: green;
@@ -16,4 +20,17 @@
 .hot-card-container button {
   padding: 10px;
   cursor: pointer;
+}
+
+@media (max-width: 1092px) {
+  .hot-cards-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hot-card-container {
+    width: 100%;
+  }
 }

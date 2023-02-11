@@ -1,12 +1,8 @@
 .toplist-item-container {
   display: flex;
   flex-direction: column;
-  max-width: 1200px;
 }
 
-.toplist-accordion {
-  max-width: 50%;
-}
 
 .toplist-header {
   display: flex;
@@ -20,10 +16,10 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  max-width: 50%;
   margin: 15px;
   border-radius: 15px;
   position: relative;
+  max-width: 100%;
 }
 
 .toplist-card button {

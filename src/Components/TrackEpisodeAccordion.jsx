@@ -4,6 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { TracklistContext } from "@/context/tracklist-context";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 export default function TrackEpisodeAccordion(props) {
   const tracklistContext = useContext(TracklistContext);
@@ -20,7 +21,11 @@ export default function TrackEpisodeAccordion(props) {
   return (
     <>
       <Accordion>
-        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+        <AccordionSummary
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+          expandIcon={<ArrowDownwardIcon></ArrowDownwardIcon>}
+        >
           <input
             type="checkbox"
             onClick={handleClick}

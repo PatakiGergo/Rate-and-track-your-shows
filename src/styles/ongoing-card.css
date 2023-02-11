@@ -1,0 +1,12 @@
+.ongoing {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  color: aliceblue;
+  border-bottom: 2px solid white;
+  margin-left: 10px;
+  margin-right: 10px;
+  
+}

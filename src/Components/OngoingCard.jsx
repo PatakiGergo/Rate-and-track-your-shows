@@ -52,11 +52,9 @@ export default function OngoingCard(props) {
     return "ez a progress", seenNumber / episodeNumber;
   }
 
- 
-
   return (
-    <div>
-      <h1>{props.title} </h1>
+    <div className="ongoing">
+      <h1>Your {props.title} progress</h1>
       {seasonAccordions && seasonAccordionsArr}
       <div></div>
       <RemoveButton type={"tracklist-delete"} id={id} />

@@ -5,6 +5,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import TrackEpisodeAccordion from "./TrackEpisodeAccordion";
 import { TracklistContext } from "@/context/tracklist-context";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
 export default function TrackSeasonAccordion(props) {
   const episodes = props.episodes;
@@ -82,7 +83,13 @@ export default function TrackSeasonAccordion(props) {
   return (
     <div>
       <Accordion>
-        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+        <AccordionSummary
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+          expandIcon={
+            <KeyboardDoubleArrowDownIcon></KeyboardDoubleArrowDownIcon>
+          }
+        >
           <input type="checkbox" onClick={setSeasonSeen} />
           <Typography>
             {props.title} Season {props.season} accordion

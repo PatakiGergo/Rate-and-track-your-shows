@@ -30,7 +30,6 @@ export default function SearchResultCard(props) {
   }
 
   function handleTrack() {
-    
     setTrackModal(!showTrackModal);
   }
 
@@ -40,7 +39,7 @@ export default function SearchResultCard(props) {
 
   return (
     <>
-      <div className="container">
+      <div className="searchcard-container">
         {showTrackModal && (
           <>
             <Backdrop
@@ -72,21 +71,22 @@ export default function SearchResultCard(props) {
             </Backdrop>
           </>
         )}
-        <img src={props.image} alt={`Image of ${props.name}`} />
-        <div>
-          <h1>{props.name}</h1>
-          <h2>Alt</h2>
-          <h3>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum,
-            unde velit possimus ullam quo quidem suscipit consectetur in ipsam
-            quisquam voluptatibus. Quasi aliquam expedita est optio consectetur
-            ut dolor in.
-          </h3>
-        </div>
-        <div>
-          <button onClick={watchlistHandler}>Watchlist</button>
-          <button onClick={handleTrack}>Track</button>
-          <button onClick={handleToplist}>Add to toplist</button>
+        <div className="container-card">
+          <img src={props.image} alt={`Image of ${props.name}`} />
+
+          <div>
+            <h1>{props.name}</h1>
+            <p>{props.genres} </p>
+            <div className="description">
+              <p >{props.description}</p>
+            </div>
+
+            <div className="searchcard-button-div">
+              <button onClick={watchlistHandler}>Watchlist</button>
+              <button onClick={handleTrack}>Track</button>
+              <button onClick={handleToplist}>Add to toplist</button>
+            </div>
+          </div>
         </div>
       </div>
     </>
