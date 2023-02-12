@@ -5,6 +5,17 @@ import AddToToplistButton from "./Buttons/AddToToplist";
 import AddToTracklist from "./Buttons/AddToTracklist";
 
 export default function SearchResultCard(props) {
+  const description = props.description;
+
+  const text = () => {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = description;
+
+    const text = wrapper.textContent;
+
+    return <div>{text}</div>;
+  };
+
   return (
     <>
       <div className="searchcard-container">
@@ -15,7 +26,7 @@ export default function SearchResultCard(props) {
             <h1>{props.name}</h1>
             <p>{props.genres} </p>
             <div className="description">
-              <p>{props.description}</p>
+              <p>{text()}</p>
             </div>
 
             <div className="searchcard-button-div">

@@ -30,7 +30,7 @@ export default function RemoveButton(props) {
 
   return (
     <>
-      <button onClick={handleClick}>Remove</button>;
+      <button onClick={handleClick}>Remove</button>
     </>
   );
 }

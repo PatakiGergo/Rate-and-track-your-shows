@@ -42,7 +42,8 @@ export default function TracklistForm(props) {
     tracklist.addMovie(
       episodeData.name,
       episodeData.externals.imdb,
-      episodeData._embedded.episodes
+      episodeData._embedded.episodes,
+      episodeData.image.medium
     );
     props.handleModal();
     console.log("tracklistformból", episodeData);

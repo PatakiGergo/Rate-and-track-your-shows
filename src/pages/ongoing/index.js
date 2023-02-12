@@ -13,6 +13,7 @@ export default function Tracklist(props) {
         imdbID={item.id}
         key={item.id}
         episodes={item.episodes}
+        img={item.img}
       />
     );
   });

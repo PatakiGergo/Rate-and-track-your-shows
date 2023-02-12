@@ -55,12 +55,21 @@ export default function OngoingCard(props) {
 
   return (
     <div className="ongoing">
-      <h1>Your {props.title} progress</h1>
-      {seasonAccordions && seasonAccordionsArr}
-      <div></div>
-      <RemoveButton type={"tracklist-delete"} id={id} />
-      <AddToToplistButton name={props.title} id={id}></AddToToplistButton>
-      <ProgressBar title={props.title} progress={calculateProgress()} />
+      <div className="tracklist-card-image">
+        <img src={props.img} alt={`Image of ${props.title}`} />
+      </div>
+      <div>
+        <h1>Your {props.title} progress</h1>
+        {seasonAccordions && seasonAccordionsArr}
+        <div></div>
+
+        <div className="ongoing-card-buttons">
+          <RemoveButton type={"tracklist-delete"} id={id} />
+          <AddToToplistButton name={props.title} id={id}></AddToToplistButton>
+        </div>
+
+        <ProgressBar title={props.title} progress={calculateProgress()} />
+      </div>
     </div>
   );
 }
