@@ -21,6 +21,12 @@
 .description {
   font-size: 20px;
   margin-top: 15px;
+  max-height: 50%;
+  overflow-y: scroll;
+}
+
+.description::-webkit-scrollbar {
+  display: none;
 }
 
 .searchcard-container img:hover {
@@ -32,6 +38,7 @@
 .container-card {
   display: flex;
   flex-direction: row;
+  max-height: 300px;
 }
 
 .searchcard-container button {

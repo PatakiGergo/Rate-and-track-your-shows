@@ -22,6 +22,7 @@ import LeaderboardOutlinedIcon from "@mui/icons-material/LeaderboardOutlined";
 import { HourglassEmptyOutlined } from "@mui/icons-material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import { useRouter } from "next/router";
 
 const drawerWidth = 240;
 
@@ -103,6 +104,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer(props) {
+  const router = useRouter();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -151,7 +153,9 @@ export default function MiniDrawer(props) {
               color: "white",
             }}
           >
-            Rate and Track your shows
+            {router.pathname === "/"
+              ? "Homepage"
+              : router.pathname.toUpperCase().split("/").join("")}
           </Typography>
         </Toolbar>
       </AppBar>
