@@ -1,11 +1,11 @@
-
-
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TracklistContext } from "@/context/tracklist-context";
-
+import Alert from "@mui/material/Alert";
+import { WatchlistContext } from "@/context/watchlist-context";
 
 export default function TracklistForm(props) {
+  const watchlistContext = useContext(WatchlistContext);
   const tracklist = useContext(TracklistContext);
   const [show, setShow] = useState("wednesday");
   const [episodeData, setEpisodeData] = useState({
@@ -19,7 +19,6 @@ export default function TracklistForm(props) {
     },
   });
 
-
   useEffect(() => {
     fetch(
       `https://api.tvmaze.com/singlesearch/shows?q=${props.show}&embed=episodes`
@@ -29,9 +28,8 @@ export default function TracklistForm(props) {
         .then((data) => setEpisodeData(data))
         .catch((err) => console.log(err))
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
-
- 
 
   const {
     register,
@@ -40,7 +38,6 @@ export default function TracklistForm(props) {
   } = useForm();
 
   const onSubmit = (data) => {
-   
     //a data a user progress
     tracklist.addMovie(
       episodeData.name,
@@ -48,6 +45,10 @@ export default function TracklistForm(props) {
       episodeData._embedded.episodes
     );
     props.handleModal();
+    console.log("tracklistformból", episodeData);
+    watchlistContext.remove(
+      episodeData.externals.imdb ? episodeData.externals.imdb : episodeData.id
+    );
   };
 
   return (

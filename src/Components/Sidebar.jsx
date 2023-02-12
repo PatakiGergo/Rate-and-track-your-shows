@@ -128,11 +128,7 @@ export default function MiniDrawer(props) {
           backgroundColor: "black",
         }}
       >
-        <Toolbar
-          sx={{
-            backgroundColor: "black",
-          }}
-        >
+        <Toolbar sx={{}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -140,7 +136,7 @@ export default function MiniDrawer(props) {
             edge="start"
             sx={{
               color: "white",
-              backgroundColor: "black",
+
               marginRight: 5,
               ...(open && { display: "none" }),
             }}
@@ -164,7 +160,6 @@ export default function MiniDrawer(props) {
         open={open}
         sx={{
           color: "white",
-          backgroundColor: "black",
         }}
       >
         <DrawerHeader
@@ -197,6 +192,9 @@ export default function MiniDrawer(props) {
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
+                  "&:hover": {
+                    backgroundColor: "#3c3c3d",
+                  },
                 }}
               >
                 <ListItemIcon
@@ -214,7 +212,6 @@ export default function MiniDrawer(props) {
                   sx={{
                     opacity: open ? 1 : 0,
                     color: "white",
-                    backgroundColor: "black",
                   }}
                 />
               </ListItemButton>
@@ -228,6 +225,9 @@ export default function MiniDrawer(props) {
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
                   color: "white",
+                  "&:hover": {
+                    backgroundColor: "#3c3c3d",
+                  },
                 }}
               >
                 <ListItemIcon
@@ -255,6 +255,9 @@ export default function MiniDrawer(props) {
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
                   color: "white",
+                  "&:hover": {
+                    backgroundColor: "#3c3c3d",
+                  },
                 }}
               >
                 <ListItemIcon
@@ -282,6 +285,9 @@ export default function MiniDrawer(props) {
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
                   color: "white",
+                  "&:hover": {
+                    backgroundColor: "#3c3c3d",
+                  },
                 }}
               >
                 <ListItemIcon
@@ -309,6 +315,9 @@ export default function MiniDrawer(props) {
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
                   color: "white",
+                  "&:hover": {
+                    backgroundColor: "#3c3c3d",
+                  },
                 }}
               >
                 <ListItemIcon

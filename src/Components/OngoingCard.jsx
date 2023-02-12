@@ -59,7 +59,7 @@ export default function OngoingCard(props) {
       {seasonAccordions && seasonAccordionsArr}
       <div></div>
       <RemoveButton type={"tracklist-delete"} id={id} />
-      <AddToToplistButton name={props.title}></AddToToplistButton>
+      <AddToToplistButton name={props.title} id={id}></AddToToplistButton>
       <ProgressBar title={props.title} progress={calculateProgress()} />
     </div>
   );

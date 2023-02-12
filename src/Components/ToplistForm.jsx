@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { ToplistContext } from "@/context/toplist-context";
+import { TracklistContext } from "@/context/tracklist-context";
 
 export default function ToplistForm(props) {
   const toplistContext = useContext(ToplistContext);
+  const tracklistContext = useContext(TracklistContext);
 
   const {
     register,
@@ -11,7 +13,6 @@ export default function ToplistForm(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-   
     const userReview = {
       ...data,
       overall_user_score:
@@ -22,11 +23,10 @@ export default function ToplistForm(props) {
           Number(data.overall_experience)) /
         5,
     };
-    toplistContext.addMovie(props.name, props.imdbID, props.img, userReview);
+    toplistContext.addMovie(props.name, props.id, props.img, userReview);
     props.handleModal();
-    
+    tracklistContext.remove(props.id);
   };
- 
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>

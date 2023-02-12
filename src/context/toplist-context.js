@@ -31,10 +31,8 @@ export default (props) => {
   ]);
 
   function sortItems(sortingType) {
-    
     switch (sortingType) {
       case "lowToHigh":
-        
         setToplist((current) => {
           const sortedArr = [...current].sort(
             (a, b) =>
@@ -45,7 +43,6 @@ export default (props) => {
         });
         break;
       case "highToLow":
-       
         setToplist((current) => {
           const sortedArr = [...current].sort(
             (a, b) =>
@@ -65,7 +62,6 @@ export default (props) => {
         alert("this is already on your toplist");
         return [...current];
       } else {
-     
         return [...current, { title: name, id, img, review }];
       }
     });

@@ -4,6 +4,7 @@ import RemoveButton from "./Buttons/RemoveButton";
 
 export default function ToplistCard(props) {
   const imdbId = props.imdbID;
+ 
 
   return (
     <div className="toplist-card">
@@ -38,7 +39,7 @@ export default function ToplistCard(props) {
 
         {/* <h3>Recommendation {props.data.recommendation} </h3> */}
       </div>
-      <RemoveButton type={"toplist-delete"} id={imdbId} />
+      <RemoveButton type={"toplist-delete"} id={props.id} />
     </div>
   );
 }

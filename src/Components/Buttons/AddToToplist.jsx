@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useReducer } from "react";
 import { ToplistContext } from "@/context/toplist-context";
 import ToplistForm from "../ToplistForm";
 import { Backdrop } from "@mui/material";
@@ -6,6 +6,8 @@ import Alert from "@mui/material/Alert";
 
 export default function AddToToplistButton(props) {
   const toplistContext = useContext(ToplistContext);
+  console.log("toplistbuttonból", props);
+
   const [showModal, setShowModal] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -34,9 +36,10 @@ export default function AddToToplistButton(props) {
             <div onClick={(e) => e.stopPropagation()}>
               <ToplistForm
                 name={props.name}
-                imdbID={props.imdbID}
+                imdbID={props.id}
                 img={props.image}
                 handleModal={handleToplist}
+                id={props.id}
               />
             </div>
           </Backdrop>

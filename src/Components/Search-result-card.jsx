@@ -1,39 +1,13 @@
 import React, { useContext, useState } from "react";
 
-import Backdrop from "@mui/material/Backdrop";
-
-import TracklistForm from "./TracklistForm";
 import AddToWatchlistButton from "./Buttons/AddToWatchlist";
 import AddToToplistButton from "./Buttons/AddToToplist";
+import AddToTracklist from "./Buttons/AddToTracklist";
 
 export default function SearchResultCard(props) {
-  const [showTrackModal, setTrackModal] = useState(false);
-
-  function handleTrack() {
-    setTrackModal(!showTrackModal);
-  }
-
-  function handleTrackClose() {
-    setTrackModal(!showTrackModal);
-  }
-
   return (
     <>
       <div className="searchcard-container">
-        {showTrackModal && (
-          <>
-            <Backdrop
-              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              open={showTrackModal}
-              onClick={handleTrackClose}
-            >
-              <div onClick={(e) => e.stopPropagation()}>
-                <TracklistForm show={props.name} handleModal={handleTrack} />
-              </div>
-            </Backdrop>
-          </>
-        )}
-
         <div className="container-card">
           <img src={props.image} alt={`Image of ${props.name}`} />
 
@@ -49,8 +23,14 @@ export default function SearchResultCard(props) {
                 name={props.name}
                 imdbID={props.imdbID}
               ></AddToWatchlistButton>
-              <button onClick={handleTrack}>Track</button>
-              <AddToToplistButton name={props.name}></AddToToplistButton>
+              <AddToTracklist
+                show={props.name}
+                name={props.name}
+              ></AddToTracklist>
+              <AddToToplistButton
+                name={props.name}
+                id={props.imdbID}
+              ></AddToToplistButton>
             </div>
           </div>
         </div>

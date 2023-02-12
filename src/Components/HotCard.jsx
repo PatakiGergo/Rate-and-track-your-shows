@@ -17,10 +17,10 @@ export default function HotCard(props) {
           that embroiled her parents.
         </p>
       </div>
-      <div>
+      <div className="hot-card-buttons">
         <button>Add to toplist</button>
         <button>Add to tracklist</button>
-        <button>Add to toplist</button>
+        <button>Add to watchlist</button>
       </div>
     </div>
   );

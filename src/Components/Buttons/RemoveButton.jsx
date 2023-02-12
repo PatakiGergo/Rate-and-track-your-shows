@@ -19,6 +19,7 @@ export default function RemoveButton(props) {
         break;
       case "toplist-delete":
         toplistContext.remove(props.id);
+        console.log("reducerből", props.id);
         break;
     }
   }
@@ -27,5 +28,9 @@ export default function RemoveButton(props) {
     reducer("asd", { type: props.type });
   }
 
-  return <button onClick={handleClick}>Remove</button>;
+  return (
+    <>
+      <button onClick={handleClick}>Remove</button>;
+    </>
+  );
 }

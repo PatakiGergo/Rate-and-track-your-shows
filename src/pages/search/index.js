@@ -40,7 +40,7 @@ export default function Search() {
       <Searchbar handleSearch={searching}></Searchbar>
       {resultArr}
       <div>
-        <h1>Currently hot:</h1>
+        <h1 className="trending">Trending shows: </h1>
         <div className="hot-cards-container">
           <HotCard></HotCard>
           <HotCard></HotCard>
