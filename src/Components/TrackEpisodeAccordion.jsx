@@ -8,7 +8,17 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 export default function TrackEpisodeAccordion(props) {
   const tracklistContext = useContext(TracklistContext);
+  const summary = props.summary;
 
+  //hookba majd!!
+  const episodeSummary = () => {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = summary;
+
+    const text = wrapper.textContent;
+
+    return <div>{text}</div>;
+  };
   //code duplicationt majd fixálni
 
   const episode = "asd";
@@ -24,7 +34,13 @@ export default function TrackEpisodeAccordion(props) {
         <AccordionSummary
           aria-controls="panel1a-content"
           id="panel1a-header"
-          expandIcon={<ArrowDownwardIcon></ArrowDownwardIcon>}
+          expandIcon={
+            <ArrowDownwardIcon
+              sx={{
+                cursor: "pointer",
+              }}
+            ></ArrowDownwardIcon>
+          }
         >
           <input
             type="checkbox"
@@ -39,7 +55,7 @@ export default function TrackEpisodeAccordion(props) {
           <Typography>{props.episode}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>{props.summary} </Typography>
+          <Typography>{episodeSummary()} </Typography>
         </AccordionDetails>
       </Accordion>
     </>

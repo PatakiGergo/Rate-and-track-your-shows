@@ -8,13 +8,28 @@ export default function WatchlistCard(props) {
   const id = props.imdbID;
 
   return (
-    <div>
-      <h1>{props.title} </h1>
-      <h2>{props.imdbID} </h2>
+    <>
+      <div className="searchcard-container">
+        <div className="container-card">
+          <img src={props.image} alt={`Image of ${props.title}`} />
 
-      <RemoveButton type={"watchlist-delete"} id={id} />
-      <AddToToplistButton name={props.title}></AddToToplistButton>
-      <AddToTracklist show={props.title} name={props.title}></AddToTracklist>
-    </div>
+          <div>
+            <h1>{props.title} </h1>
+            {/* <h2>{props.imdbID} </h2> */}
+
+            <p className="description">{props.description} </p>
+
+            <div className="searchcard-button-div">
+              <RemoveButton type={"watchlist-delete"} id={id} />
+              <AddToToplistButton name={props.title}></AddToToplistButton>
+              <AddToTracklist
+                show={props.title}
+                name={props.title}
+              ></AddToTracklist>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

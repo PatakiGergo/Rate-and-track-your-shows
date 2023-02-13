@@ -33,6 +33,8 @@ export default function SearchResultCard(props) {
               <AddToWatchlistButton
                 name={props.name}
                 imdbID={props.imdbID}
+                image={props.image}
+                description={props.description}
               ></AddToWatchlistButton>
               <AddToTracklist
                 show={props.name}

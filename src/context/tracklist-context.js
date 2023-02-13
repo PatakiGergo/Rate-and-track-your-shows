@@ -58,9 +58,9 @@ export default (props) => {
   const handleSeen = useMemo(() => {
     return function handleSeen(id, episodeTitle, showTitle) {
       setTracklist((current) => {
-        current.map((show) => {
+        current.find((show) => {
           if (show.title === showTitle) {
-            show.episodes.map((episode) => {
+            show.episodes.find((episode) => {
               if (episode.name === episodeTitle) {
                 if (seenEpisodes.includes(episode)) {
                   setSeenEpisodes((prev) => {
@@ -81,7 +81,7 @@ export default (props) => {
   const handleSeenSeason = useMemo(() => {
     return function handleSeenSeason(id, episodeTitle, showTitle) {
       setTracklist((current) => {
-        current.map((show) => {
+        current.find((show) => {
           if (show.title === showTitle) {
             show.episodes.map((episode) => {
               if (episode.name === episodeTitle) {

@@ -11,14 +11,13 @@ export default (props) => {
   const [watchlist, setWatchlist] = useState([{ title: "asd", id: 12 }]);
 
   //adding movies to watchlist with chenking if it's already there or not
-  function addToWatchlist(name, id) {
+  function addToWatchlist(name, id, image, description) {
     setWatchlist((current) => {
       if (current.some((item) => item.title === name)) {
         alert("this is already on your list");
         return [...current];
       } else {
-       
-        return [...current, { title: name, id }];
+        return [...current, { title: name, id, image, description }];
       }
     });
   }
@@ -29,8 +28,6 @@ export default (props) => {
       return current.filter((item) => item.id !== id);
     });
   }
-
- 
 
   return (
     <WatchlistContext.Provider

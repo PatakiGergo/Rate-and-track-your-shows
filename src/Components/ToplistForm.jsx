@@ -30,31 +30,32 @@ export default function ToplistForm(props) {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="">Plot</label>
+      <h1>Rate the show!</h1>
+      <label htmlFor="">Plot:</label>
       <input
         type="range"
         placeholder="Plot"
         {...register("plot", { required: true, max: 100, min: 1 })}
       />
-      <label htmlFor="">Characters</label>
+      <label htmlFor="">Characters:</label>
       <input
         type="range"
         placeholder="Characters"
         {...register("characters", { required: true, max: 100, min: 1 })}
       />
-      <label htmlFor="">Music</label>
+      <label htmlFor="">Music:</label>
       <input
         type="range"
         placeholder="Music"
         {...register("music", { required: true, max: 100, min: 1 })}
       />
-      <label htmlFor="">Acting</label>
+      <label htmlFor="">Acting:</label>
       <input
         type="range"
         placeholder="Acting"
         {...register("acting", { required: true, max: 100, min: 1 })}
       />
-      <label htmlFor="">Overall Experience</label>
+      <label htmlFor="">Overall Experience:</label>
       <input
         type="range"
         placeholder="Overall experience"
@@ -65,33 +66,41 @@ export default function ToplistForm(props) {
         })}
       />
       <label htmlFor="">Write your review: </label>
-      <textarea {...register("review", {})} />
+      <textarea {...register("review", {})} rows="10" cols="40" />
       <label htmlFor="">What I liked: </label>
-      <textarea {...register("liked", {})} />
+      <textarea {...register("liked", {})} rows="5" cols="40" />
       <label htmlFor="">What I disliked: </label>
-      <textarea {...register("disliked", {})} />
+      <textarea {...register("disliked", {})} rows="5" cols="40" />
 
-      <label htmlFor="">Would you recommend?</label>
-      <label htmlFor="">Yes</label>
-      <input
-        {...register("recommendation", { required: true })}
-        type="radio"
-        value="Yes"
-      />
-      <label htmlFor="">Maybe</label>
-      <input
-        {...register("recommendation", { required: true })}
-        type="radio"
-        value="Maybe"
-      />
-      <label htmlFor="">No</label>
-      <input
-        {...register("recommendation", { required: true })}
-        type="radio"
-        value=" No"
-      />
+      <div className="recommend">
+        <label htmlFor="">Would you recommend?</label>
+        <div>
+          <label htmlFor="">Yes</label>
+          <input
+            {...register("recommendation", { required: true })}
+            type="radio"
+            value="Yes"
+          />
+        </div>
+        <div>
+          <label htmlFor="">Maybe</label>
+          <input
+            {...register("recommendation", { required: true })}
+            type="radio"
+            value="Maybe"
+          />
+        </div>
+        <div>
+          <label htmlFor="">No</label>
+          <input
+            {...register("recommendation", { required: true })}
+            type="radio"
+            value=" No"
+          />
+        </div>
+      </div>
 
-      <input type="submit" />
+      <button>Submit</button>
     </form>
   );
 }

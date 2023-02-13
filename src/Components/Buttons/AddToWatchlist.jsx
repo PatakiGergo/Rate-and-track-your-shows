@@ -26,7 +26,12 @@ export default function AddToWatchlistButton(props) {
         setNoSuccess(false);
       }, 1500);
     } else {
-      watchlistContext.addMovie(props.name, props.imdbID);
+      watchlistContext.addMovie(
+        props.name,
+        props.imdbID,
+        props.image,
+        props.description
+      );
     }
   }
 

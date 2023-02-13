@@ -5,7 +5,6 @@ export default function Searchbar(props) {
 
   function inputHandler(e) {
     setSearchState(e.target.value);
-    
   }
 
   function searchHandler(e) {
@@ -14,14 +13,14 @@ export default function Searchbar(props) {
   }
 
   return (
-    <form onSubmit={searchHandler}>
+    <form onSubmit={searchHandler} className="search-form">
       <input
-        type="text"
+        type="search"
         onChange={inputHandler}
         className="searchbar"
         placeholder="Enter show title..."
       />
-      <button className="search-button">Search</button>
+      <button type="submit">search</button>
     </form>
   );
 }
