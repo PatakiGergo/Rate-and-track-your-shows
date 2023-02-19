@@ -27,7 +27,6 @@ export default (props) => {
         disliked: "You can also see what you have disliked",
         recommendation: "No",
         overall_user_score: "Here, you will see your overall rating in ",
-       
       },
     },
   ]);
@@ -61,7 +60,6 @@ export default (props) => {
   function addToToplist(name, id, img, review) {
     setToplist((current) => {
       if (current.some((item) => item.title === name)) {
-        alert("this is already on your toplist");
         return [...current];
       } else {
         return [...current, { title: name, id, img, review }];
@@ -69,7 +67,7 @@ export default (props) => {
     });
   }
 
-  //removing movies from watchlist
+  //removing movies from toplist
   function removeMovie(id) {
     setToplist((current) => {
       return current.filter((item) => item.id !== id);

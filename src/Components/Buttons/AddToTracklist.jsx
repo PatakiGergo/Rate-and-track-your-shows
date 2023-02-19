@@ -11,6 +11,7 @@ export default function AddToTracklist(props) {
   const tracklistContext = useContext(TracklistContext);
   const toplistContext = useContext(ToplistContext);
   const [showTrackModal, setTrackModal] = useState(false);
+  const [added, setAdded] = useState(false);
   const [episodeData, setEpisodeData] = useState({
     name: "asd",
     image: "image.medium",
@@ -51,8 +52,21 @@ export default function AddToTracklist(props) {
     setTrackModal(!showTrackModal);
   }
 
+  function successAlert() {
+    setAdded(true);
+    setTimeout(() => {
+      setAdded(false);
+    }, 1500);
+  }
+
   return (
     <>
+      {added && (
+        <UserAlert
+          type={"success"}
+          message={"Succesfully added to tracklist"}
+        ></UserAlert>
+      )}
       {noSuccess && (
         <UserAlert type={"error"} message={`Already on your ${list}`} />
       )}
@@ -69,6 +83,7 @@ export default function AddToTracklist(props) {
                 show={props.name}
                 handleModal={handleTrack}
                 id={props.id}
+                handleSuccess={successAlert}
               />
             </div>
           </Backdrop>

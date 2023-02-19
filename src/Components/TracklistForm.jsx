@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TracklistContext } from "@/context/tracklist-context";
-import Alert from "@mui/material/Alert";
+
 import { WatchlistContext } from "@/context/watchlist-context";
 import OngoingCard from "./OngoingCard";
+import UserAlert from "./UserAlert";
 
 export default function TracklistForm(props) {
   const watchlistContext = useContext(WatchlistContext);
@@ -47,10 +48,12 @@ export default function TracklistForm(props) {
       episodeData.image.medium
     );
     props.handleModal();
-    
+
     watchlistContext.remove(
       episodeData.externals.imdb ? episodeData.externals.imdb : episodeData.id
     );
+
+    props.handleSuccess();
   };
 
   handleSubmit(onSubmit);

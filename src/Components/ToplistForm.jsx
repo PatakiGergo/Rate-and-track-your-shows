@@ -25,6 +25,7 @@ export default function ToplistForm(props) {
     };
     toplistContext.addMovie(props.name, props.id, props.img, userReview);
     props.handleModal();
+    props.handleSuccess();
     tracklistContext.remove(props.id);
   };
 

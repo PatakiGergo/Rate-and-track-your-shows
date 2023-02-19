@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { WatchlistContext } from "@/context/watchlist-context";
 import { ToplistContext } from "@/context/toplist-context";
 import { TracklistContext } from "@/context/tracklist-context";
-import { Alert } from "@mui/material";
+import UserAlert from "../UserAlert";
 
 export default function AddToWatchlistButton(props) {
   const watchlistContext = useContext(WatchlistContext);
@@ -10,6 +10,7 @@ export default function AddToWatchlistButton(props) {
   const tracklistContext = useContext(TracklistContext);
   const [noSuccess, setNoSuccess] = useState(false);
   const [list, setList] = useState("Toplist");
+  const [added, setAdded] = useState(false);
 
   function watchlistHandler() {
     if (toplistContext.toplistItems.some((item) => item.title === props.name)) {
@@ -25,6 +26,14 @@ export default function AddToWatchlistButton(props) {
       setTimeout(() => {
         setNoSuccess(false);
       }, 1500);
+    } else if (
+      watchlistContext.watchlistItems.some((item) => item.title === props.name)
+    ) {
+      setList("watchlist");
+      setNoSuccess(true);
+      setTimeout(() => {
+        setNoSuccess(false);
+      }, 1500);
     } else {
       watchlistContext.addMovie(
         props.name,
@@ -32,26 +41,26 @@ export default function AddToWatchlistButton(props) {
         props.image,
         props.description
       );
+      setAdded(true);
+      setTimeout(() => {
+        setAdded(false);
+      }, 1500);
     }
   }
 
   return (
     <>
+      {added && (
+        <UserAlert
+          type={"success"}
+          message={`${props.name} successfully added to your watchlist `}
+        ></UserAlert>
+      )}
       {noSuccess && (
-        <Alert
-          variant="filled"
-          severity="error"
-          sx={{
-            position: "fixed",
-            top: "15px",
-            right: "850px",
-
-            zIndex: "9999",
-            margin: "0 auto",
-          }}
-        >
-          This item is already on your {list}
-        </Alert>
+        <UserAlert
+          type={"error"}
+          message={`${props.name} is already on your ${list}`}
+        ></UserAlert>
       )}
       <button className={props.class} onClick={watchlistHandler}>
         Watchlist

@@ -11,19 +11,27 @@ import "@/styles/ongoing-card.css";
 import WatchlistContext from "@/context/watchlist-context";
 import ToplistContext from "@/context/toplist-context";
 import TracklistContext from "@/context/tracklist-context";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }) {
   return (
-    <div className="main-container">
-      <ToplistContext>
-        <WatchlistContext>
-          <TracklistContext>
-            <Sidebar>
-              <Component {...pageProps} />
-            </Sidebar>
-          </TracklistContext>
-        </WatchlistContext>
-      </ToplistContext>
-    </div>
+    <html>
+      <Head>
+        <title>Homepage</title>
+      </Head>
+      <body>
+        <div className="main-container">
+          <ToplistContext>
+            <WatchlistContext>
+              <TracklistContext>
+                <Sidebar>
+                  <Component {...pageProps} />
+                </Sidebar>
+              </TracklistContext>
+            </WatchlistContext>
+          </ToplistContext>
+        </div>
+      </body>
+    </html>
   );
 }

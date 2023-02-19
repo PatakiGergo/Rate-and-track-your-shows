@@ -3,14 +3,9 @@ import { TracklistContext } from "@/context/tracklist-context";
 import LinearProgress from "@mui/material/LinearProgress";
 
 export default function ProgressBar(props) {
-  const tracklistContextArr = useContext(TracklistContext);
-  const title = props.title;
-
-
-
   return (
-    <div>
-      {/* <h1>Next episode: </h1> */}
+    <div className="bar">
+    
 
       <h1>Progress: {Math.floor(props.progress * 100)} %</h1>
       <LinearProgress

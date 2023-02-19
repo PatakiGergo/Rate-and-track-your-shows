@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
-import ToplistCard from "@/Components/ToplistCard";
+
 import WatchlistCard from "@/Components/WatchListCard";
 import { WatchlistContext } from "@/context/watchlist-context";
+import Head from "next/head";
 
 export default function Watchlist() {
   const watchlist = useContext(WatchlistContext).watchlistItems;
@@ -18,5 +19,14 @@ export default function Watchlist() {
     );
   });
 
-  return <div>{watchListItems}</div>;
+  return (
+    <html>
+      <Head>
+        <title>Watchlist</title>
+      </Head>
+      <body>
+        <div>{watchListItems}</div>
+      </body>
+    </html>
+  );
 }

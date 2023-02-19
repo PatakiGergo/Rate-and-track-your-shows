@@ -14,7 +14,6 @@ export default (props) => {
   function addToWatchlist(name, id, image, description) {
     setWatchlist((current) => {
       if (current.some((item) => item.title === name)) {
-        alert("this is already on your list");
         return [...current];
       } else {
         return [...current, { title: name, id, image, description }];
