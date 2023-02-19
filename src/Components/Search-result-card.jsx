@@ -43,6 +43,7 @@ export default function SearchResultCard(props) {
               <AddToToplistButton
                 name={props.name}
                 id={props.imdbID}
+                img={props.image}
               ></AddToToplistButton>
             </div>
           </div>

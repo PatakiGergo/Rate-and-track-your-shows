@@ -6,7 +6,7 @@ export default function ProgressBar(props) {
   const tracklistContextArr = useContext(TracklistContext);
   const title = props.title;
 
-  console.log(props.progress);
+
 
   return (
     <div>

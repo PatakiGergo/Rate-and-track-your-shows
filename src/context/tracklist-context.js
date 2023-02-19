@@ -9,6 +9,7 @@ export const TracklistContext = React.createContext({
   sortItems: (sortBy) => {},
   calculateProgress: (title) => {},
   handleSeenSeason: () => {},
+  handleSeasonUndo: () => {},
 });
 
 // eslint-disable-next-line react/display-name, import/no-anonymous-default-export
@@ -85,6 +86,7 @@ export default (props) => {
           if (show.title === showTitle) {
             show.episodes.map((episode) => {
               if (episode.name === episodeTitle) {
+                episode.showTitle = showTitle;
                 setSeenEpisodes((prev) => [...prev, episode]);
               }
             });
@@ -94,6 +96,24 @@ export default (props) => {
       });
     };
   }, [setSeenEpisodes, setTracklist]);
+
+  function handleSeasonUndo(id, episodeTitle, showTitle, season) {
+    setTracklist((current) => {
+      current.find((show) => {
+        if (show.title === showTitle) {
+          show.episodes.map((episode) => {
+            if (
+              episode.name === episodeTitle &&
+              episode.showTitle === showTitle
+            ) {
+              setSeenEpisodes((prev) => prev.filter((item) => item != episode));
+            }
+          });
+        }
+      });
+      return current;
+    });
+  }
 
   /////// NOTE TO SELF_ DO IT WITH NUMBERS ON THE SEASON COMPONENT THEN CALCULATE IN PROGRESS WITH ALL SEASON ELEMENTS INSTEAD OF THIS:
   function calculateProgress(name) {
@@ -122,6 +142,7 @@ export default (props) => {
         calculateProgress: calculateProgress,
         handleSeen: handleSeen,
         handleSeenSeason: handleSeenSeason,
+        handleSeasonUndo: handleSeasonUndo,
       }}
     >
       {props.children}

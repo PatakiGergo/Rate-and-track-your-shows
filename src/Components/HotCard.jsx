@@ -1,26 +1,27 @@
 import React from "react";
+import AddToTracklist from "./Buttons/AddToTracklist";
+import AddToWatchlistButton from "./Buttons/AddToWatchlist";
+import AddToToplistButton from "./Buttons/AddToToplist";
 
 export default function HotCard(props) {
   return (
     <div className="hot-card-container">
-      <h1>Wednesday</h1>
+      <h1>{props.title} </h1>
       <div className="hot-picture">
-        <img
-          src="https://sm.ign.com/ign_hu/screenshot/default/wednesday-2-poszter-1-crop_mn9d.jpg"
-          alt=""
-        />
+        <img src={props.image} alt={`Image of ${props.title} `} />
       </div>
       <div className="hot-description">
-        <p>
-          Follows Wednesday Addams&apos; years as a student, when she attempts
-          to master her emerging psychic ability, thwart and solve the mystery
-          that embroiled her parents.
-        </p>
+        <p>{props.description}</p>
       </div>
       <div className="hot-card-buttons">
-        <button>Add to toplist</button>
-        <button>Add to tracklist</button>
-        <button>Add to watchlist</button>
+       <AddToToplistButton name={props.title} id={props.id} img={props.img}></AddToToplistButton>
+        <AddToTracklist name={props.title}></AddToTracklist>
+        <AddToWatchlistButton
+          name={props.title}
+          imdbId={props.id}
+          image={props.image}
+          description={props.description}
+        ></AddToWatchlistButton>
       </div>
     </div>
   );

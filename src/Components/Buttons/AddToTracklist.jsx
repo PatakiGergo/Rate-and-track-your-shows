@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import TracklistForm from "../TracklistForm";
 import { ToplistContext } from "@/context/toplist-context";
-import { WatchlistContext } from "@/context/watchlist-context";
-import { Alert } from "@mui/material";
+import UserAlert from "../UserAlert";
+import { TracklistContext } from "@/context/tracklist-context";
 
 //fromwherepropot csinálni és akkor onnan removeolja
 
 export default function AddToTracklist(props) {
+  const tracklistContext = useContext(TracklistContext);
   const toplistContext = useContext(ToplistContext);
   const [showTrackModal, setTrackModal] = useState(false);
   const [episodeData, setEpisodeData] = useState({
@@ -24,10 +25,19 @@ export default function AddToTracklist(props) {
   //succes alert
   const [success, setSuccess] = useState(false);
   const [noSuccess, setNoSuccess] = useState(false);
+  const [list, setList] = useState("toplist");
 
   function handleTrack() {
     if (toplistContext.toplistItems.some((item) => item.title === props.name)) {
       /* alert("It's already on your toplist"); */
+      setNoSuccess(true);
+      setTimeout(() => {
+        setNoSuccess(false);
+      }, 1500);
+    } else if (
+      tracklistContext.tracklistItems.some((item) => item.title === props.name)
+    ) {
+      setList("tracklist");
       setNoSuccess(true);
       setTimeout(() => {
         setNoSuccess(false);
@@ -44,20 +54,7 @@ export default function AddToTracklist(props) {
   return (
     <>
       {noSuccess && (
-        <Alert
-          variant="filled"
-          severity="error"
-          sx={{
-            position: "fixed",
-            top: "15px",
-            right: "850px",
-
-            zIndex: "9999",
-            margin: "0 auto",
-          }}
-        >
-          This item is already on your toplist
-        </Alert>
+        <UserAlert type={"error"} message={`Already on your ${list}`} />
       )}
       <button onClick={handleTrack}>Add to tracklist</button>
       {showTrackModal && (

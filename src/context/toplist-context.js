@@ -12,20 +12,22 @@ export const ToplistContext = React.createContext({
 export default (props) => {
   const [toplist, setToplist] = useState([
     {
-      title: "asd",
+      title: "Add your first movie",
       id: 12,
-      image: "no",
+      image:
+        "https://images.unsplash.com/photo-1627873959341-905d35362273?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
       review: {
         plot: "10",
         characters: "10",
         music: "11",
         acting: "55",
         overall_experience: "444",
-        liked: "yeeee",
-        review: "It's alriight",
-        disliked: "prrrr",
+        liked: "Or liked",
+        review: "Here will be your review",
+        disliked: "You can also see what you have disliked",
         recommendation: "No",
-        overall_user_score: 0,
+        overall_user_score: "Here, you will see your overall rating in ",
+       
       },
     },
   ]);

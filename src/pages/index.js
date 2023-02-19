@@ -1,33 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import Login from "@/Components/Login";
+import Register from "@/Components/Register";
 
-export default function Homepage() {
+export default function Dashboard(props) {
+  const [register, setRegister] = useState(false);
+
+  function registerHandler() {
+    setRegister((prev) => !prev);
+  }
+
   return (
     <div className="home">
-      <button>asd</button>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
-      <h1>Homepage</h1>
+      {!register && <Login register={registerHandler} />}
+      {register && <Register register={registerHandler} />}
     </div>
   );
 }

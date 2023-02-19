@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 
 import RemoveButton from "./Buttons/RemoveButton";
+import MoreInfo from "./Buttons/MoreInfo";
 
 export default function ToplistCard(props) {
   const imdbId = props.imdbID;
- 
 
   return (
     <div className="toplist-card">
@@ -39,7 +39,10 @@ export default function ToplistCard(props) {
 
         {/* <h3>Recommendation {props.data.recommendation} </h3> */}
       </div>
-      <RemoveButton type={"toplist-delete"} id={props.id} />
+      <div className="buttondiv">
+        <MoreInfo show={props.title} />
+        <RemoveButton type={"toplist-delete"} id={props.id} />
+      </div>
     </div>
   );
 }

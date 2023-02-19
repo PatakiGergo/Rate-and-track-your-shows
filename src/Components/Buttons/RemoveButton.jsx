@@ -19,7 +19,7 @@ export default function RemoveButton(props) {
         break;
       case "toplist-delete":
         toplistContext.remove(props.id);
-        console.log("reducerből", props.id);
+       
         break;
     }
   }

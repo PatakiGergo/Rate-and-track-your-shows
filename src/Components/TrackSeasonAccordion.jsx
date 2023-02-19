@@ -38,7 +38,13 @@ export default function TrackSeasonAccordion(props) {
         show.episodes.map((episode) => {
           if (episode.id === id) {
             //ide contextes method
-            tracklistContext.handleSeenSeason(id, episode.name, show.title);
+
+            tracklistContext.handleSeenSeason(
+              id,
+              episode.name,
+              show.title,
+              episode.season
+            );
           }
         });
       }
@@ -48,17 +54,38 @@ export default function TrackSeasonAccordion(props) {
   const [seasonSeen, setWholeSeasonSeen] = useState(false);
 
   function setSeasonSeen(e) {
-    e.stopPropagation();
-    tracklistContext.tracklistItems.map((show) => {
-      if (show.title === props.title) {
-        show.episodes.map((episode) => {
-          if (episode.season === props.season) {
-            seasonCheckmarkHandler(episode.id, e);
-            setWholeSeasonSeen(!seasonSeen);
-          }
-        });
-      }
-    });
+    if (seasonSeen) {
+      e.stopPropagation();
+      setWholeSeasonSeen(!seasonSeen);
+      tracklistContext.tracklistItems.map((show) => {
+        if (show.title === props.title) {
+          show.episodes.map((episode) => {
+            if (episode.season === props.season) {
+              //ide contextes method
+
+              tracklistContext.handleSeasonUndo(
+                episode.id,
+                episode.name,
+                show.title,
+                episode.season
+              );
+            }
+          });
+        }
+      });
+    } else {
+      e.stopPropagation();
+      tracklistContext.tracklistItems.map((show) => {
+        if (show.title === props.title) {
+          show.episodes.map((episode) => {
+            if (episode.season === props.season) {
+              seasonCheckmarkHandler(episode.id, e);
+              setWholeSeasonSeen(!seasonSeen);
+            }
+          });
+        }
+      });
+    }
   }
 
   episodes.forEach((episode) => {

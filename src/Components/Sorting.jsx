@@ -6,6 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { ToplistContext } from "@/context/toplist-context";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 export default function BasicSelect() {
   let toplistItemsArr = React.useContext(ToplistContext);
@@ -21,20 +22,19 @@ export default function BasicSelect() {
   }, [sorting]);
 
   return (
-    <Box sx={{ maxWidth: 140 }}>
-      <FormControl fullWidth>
+    <Box >
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-simple-select-label">Sort by:</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={sorting}
           label="Age"
           onChange={handleChange}
+          input={<OutlinedInput label="Name" />}
         >
-          <MenuItem value={"sort"}>Sort by: </MenuItem>
           <MenuItem value={"lowToHigh"}>Rating: Low to high</MenuItem>
           <MenuItem value={"highToLow"}>Rating: High to low</MenuItem>
-          <MenuItem value={"Old"}>Addition time: Old</MenuItem>
-          <MenuItem value={"New"}>Addition time: New</MenuItem>
         </Select>
       </FormControl>
     </Box>

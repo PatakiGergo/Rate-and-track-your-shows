@@ -7,7 +7,7 @@ export default function Toplist() {
   const toplist = useContext(ToplistContext).toplistItems;
 
   const toplistItemsArr = toplist.map((item) => {
-    console.log("indexes toplistből", item);
+   
     return (
       <>
         <ToplistCard

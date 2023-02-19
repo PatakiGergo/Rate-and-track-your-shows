@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { TracklistContext } from "@/context/tracklist-context";
 import Alert from "@mui/material/Alert";
 import { WatchlistContext } from "@/context/watchlist-context";
+import OngoingCard from "./OngoingCard";
 
 export default function TracklistForm(props) {
   const watchlistContext = useContext(WatchlistContext);
@@ -26,7 +27,7 @@ export default function TracklistForm(props) {
       res
         .json()
         .then((data) => setEpisodeData(data))
-        .catch((err) => console.log(err))
+        .catch()
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
@@ -46,16 +47,19 @@ export default function TracklistForm(props) {
       episodeData.image.medium
     );
     props.handleModal();
-    console.log("tracklistformból", episodeData);
+    
     watchlistContext.remove(
       episodeData.externals.imdb ? episodeData.externals.imdb : episodeData.id
     );
   };
 
+  handleSubmit(onSubmit);
+
   return (
     <>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <input type="submit" />
+        <h1>Are you sure?</h1>
+        <button type="submit">Yes</button>
       </form>
     </>
   );

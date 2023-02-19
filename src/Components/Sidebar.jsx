@@ -23,6 +23,7 @@ import { HourglassEmptyOutlined } from "@mui/icons-material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import { useRouter } from "next/router";
+import Account from "./Account";
 
 const drawerWidth = 240;
 
@@ -128,6 +129,10 @@ export default function MiniDrawer(props) {
         open={open}
         sx={{
           backgroundColor: "black",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <Toolbar sx={{}}>
@@ -154,10 +159,11 @@ export default function MiniDrawer(props) {
             }}
           >
             {router.pathname === "/"
-              ? "Homepage"
+              ? "Dashboard"
               : router.pathname.toUpperCase().split("/").join("")}
           </Typography>
         </Toolbar>
+        <Account></Account>
       </AppBar>
       <Drawer
         variant="permanent"
@@ -212,7 +218,7 @@ export default function MiniDrawer(props) {
                   <HomeOutlinedIcon></HomeOutlinedIcon>
                 </ListItemIcon>
                 <ListItemText
-                  primary={"Homepage"}
+                  primary={"Dashboard"}
                   sx={{
                     opacity: open ? 1 : 0,
                     color: "white",

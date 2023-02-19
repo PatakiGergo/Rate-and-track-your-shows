@@ -40,3 +40,27 @@
 .search-form button[type="submit"]:hover {
   opacity: 1;
 }
+
+@media only screen and (max-width: 570px) {
+  .search-form {
+    margin-left: 70px;
+  }
+  .search-form input[type="search"] {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 312px) {
+  .search-form {
+    margin-left: 70px;
+  }
+  .search-form input[type="search"] {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 312px) {
+  .search-form input[type="search"] {
+    font-size: 10px;
+  }
+}

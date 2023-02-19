@@ -10,7 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  max-width: 1400px;
 }
 
 .toplist-header {
@@ -20,40 +20,43 @@
 }
 
 .toplist-card {
-  background-color: rgba(0, 0, 255, 0.192);
+  background-color: rgb(215, 215, 215);
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
   margin-bottom: 5px;
-  width: 100%;
+  max-width: 100%;
+  color: black;
 }
 
 .toplist-card button {
   padding: 10px 20px 10px 20px;
   border-radius: 5px;
-  border: none;
+  border: 1px solid black;
   font-size: 20px;
   cursor: pointer;
-  transition: all 500ms;
+  transition: all 300ms;
+  font-weight: 700;
+}
+
+.toplist-card .buttondiv {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
   position: absolute;
   right: 15px;
   bottom: 15px;
 }
 
 .toplist-card button:hover {
-  background-color: bisque;
+  background-color: rgba(0, 0, 0, 0.212);
 }
 
 .toplist-image {
-  max-height: 100%;
-  max-width: 100%;
-  margin: 10px;
+  max-width: 210px;
+  margin-right: 20px;
   transition: all 300ms;
-}
-
-.toplist-image:hover {
-  transform: scale(110%, 110%);
 }
 
 .toplist-info {

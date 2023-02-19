@@ -12,7 +12,6 @@ import WatchlistContext from "@/context/watchlist-context";
 import ToplistContext from "@/context/toplist-context";
 import TracklistContext from "@/context/tracklist-context";
 
-
 export default function App({ Component, pageProps }) {
   return (
     <div className="main-container">
