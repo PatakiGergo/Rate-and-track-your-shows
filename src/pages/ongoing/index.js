@@ -15,6 +15,7 @@ export default function Tracklist(props) {
         key={item.id}
         episodes={item.episodes}
         img={item.img}
+        seasonsSeen={item.seasonsSeen}
       />
     );
   });

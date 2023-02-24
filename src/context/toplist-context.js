@@ -62,7 +62,7 @@ export default (props) => {
       if (current.some((item) => item.title === name)) {
         return [...current];
       } else {
-        return [...current, { title: name, id, img, review }];
+        return [...current, { title: name, id, image: img, review }];
       }
     });
   }

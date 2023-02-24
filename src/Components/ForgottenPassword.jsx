@@ -22,7 +22,11 @@ function Copyright(props) {
       {...props}
     >
       {"App made by "}
-      <Link color="inherit" href="https://github.com/PatakiGergo" target={"_blank"}>
+      <Link
+        color="inherit"
+        href="https://github.com/PatakiGergo"
+        target={"_blank"}
+      >
         Github/PatakiGergo
       </Link>{" "}
       {new Date().getFullYear()}
@@ -33,7 +37,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const Login = (props) => {
+const ForgottenPassword = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -65,7 +69,15 @@ const Login = (props) => {
               color: "white",
             }}
           >
-            Sign in to see your dashboard
+            Password recovery
+          </Typography>
+          <Typography
+            sx={{
+              color: "white",
+              marginTop: "20",
+            }}
+          >
+            We will e-mail you a link to recover your password
           </Typography>
           <Box
             component="form"
@@ -87,23 +99,7 @@ const Login = (props) => {
               disabled
               title="Currently under development"
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              disabled
-              title="Currently under development"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" disabled />}
-              label="Remember me"
-              title="Currently under development"
-            />
+
             <Button
               type="submit"
               fullWidth
@@ -118,21 +114,10 @@ const Login = (props) => {
                 },
               }}
             >
-              Sign In
+              Send
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link
-                  href="#"
-                  variant="body2"
-                  sx={{
-                    color: "white",
-                  }}
-                  onClick={props.forgottenPW}
-                >
-                  Forgot password?
-                </Link>
-              </Grid>
+              <Grid item xs></Grid>
               <Grid item>
                 <Link
                   href="#"
@@ -140,9 +125,9 @@ const Login = (props) => {
                   sx={{
                     color: "white",
                   }}
-                  onClick={props.register}
+                  onClick={props.login}
                 >
-                  {"Don't have an account? Sign Up"}
+                  {"Back to Login"}
                 </Link>
               </Grid>
             </Grid>
@@ -154,4 +139,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default ForgottenPassword;

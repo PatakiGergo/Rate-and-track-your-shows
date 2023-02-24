@@ -15,15 +15,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        Rate and track your shows
+    <Typography variant="body2" color="white" align="center" {...props}>
+      {"App made by "}
+      <Link
+        color="inherit"
+        href="https://github.com/PatakiGergo"
+        target={"_blank"}
+      >
+        Github/PatakiGergo
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -37,7 +36,6 @@ export default function Register(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-  
   };
 
   return (
@@ -64,7 +62,7 @@ export default function Register(props) {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
-            <Grid container spacing={2}>
+            <Grid container spacing={2} title="Currently under development">
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
@@ -125,6 +123,7 @@ export default function Register(props) {
               </Grid>
             </Grid>
             <Button
+              title="Currently under development"
               type="submit"
               fullWidth
               variant="contained"

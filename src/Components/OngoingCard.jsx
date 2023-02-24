@@ -29,6 +29,7 @@ export default function OngoingCard(props) {
         title={props.title}
         episodes={props.episodes}
         wholeSeries={episodes}
+        seen={props.seasonsSeen}
       />
     );
     if (i === seasonNumber) {
@@ -65,7 +66,12 @@ export default function OngoingCard(props) {
 
         <div className="ongoing-card-buttons">
           <RemoveButton type={"tracklist-delete"} id={id} />
-          <AddToToplistButton name={props.title} id={id}></AddToToplistButton>
+          <AddToToplistButton
+            name={props.title}
+            id={id}
+            from={"tracklist"}
+            progress={calculateProgress()}
+          ></AddToToplistButton>
         </div>
 
         <ProgressBar title={props.title} progress={calculateProgress()} />

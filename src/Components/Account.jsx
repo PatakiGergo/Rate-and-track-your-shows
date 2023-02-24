@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Account = (props) => {
   return (
-    <div className="account">
+    <div className="account" title="Currently unavailable">
       <AccountCircleIcon></AccountCircleIcon>
       <Link href="./">
         <p>Login</p>

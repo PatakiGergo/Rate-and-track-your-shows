@@ -15,7 +15,7 @@ export default function Toplist() {
           title={item.title}
           imdbID={item.id}
           data={item.review}
-          img={item.img}
+          img={item.image}
           id={item.id}
         />
       </>

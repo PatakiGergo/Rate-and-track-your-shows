@@ -24,7 +24,6 @@ export default function TrackSeasonAccordion(props) {
       if (show.title === props.title) {
         show.episodes.map((episode) => {
           if (episode.id === id) {
-            //ide contextes method
             tracklistContext.handleSeen(id, episode.name, show.title);
           }
         });
@@ -37,13 +36,11 @@ export default function TrackSeasonAccordion(props) {
       if (show.title === props.title) {
         show.episodes.map((episode) => {
           if (episode.id === id) {
-            //ide contextes method
-
             tracklistContext.handleSeenSeason(
               id,
               episode.name,
               show.title,
-              episode.season
+              props.season
             );
           }
         });
@@ -51,16 +48,19 @@ export default function TrackSeasonAccordion(props) {
     });
   }
 
-  const [seasonSeen, setWholeSeasonSeen] = useState(false);
+  const [seasonSeen, setWholeSeasonSeen] = useState(
+    props.seen?.includes(season)
+  );
 
   function setSeasonSeen(e) {
     if (seasonSeen) {
       e.stopPropagation();
-      setWholeSeasonSeen(!seasonSeen);
+
       tracklistContext.tracklistItems.map((show) => {
         if (show.title === props.title) {
           show.episodes.map((episode) => {
             if (episode.season === props.season) {
+              setWholeSeasonSeen(false);
               //ide contextes method
 
               tracklistContext.handleSeasonUndo(
@@ -102,6 +102,8 @@ export default function TrackSeasonAccordion(props) {
           checkmarkHandler={episodeCheckmarkHandler}
           id={episode.id}
           seasonSeen={seasonSeen}
+          seen={props.seen}
+          seasonSetter={setSeasonSeen}
         />
       );
     }
@@ -109,7 +111,11 @@ export default function TrackSeasonAccordion(props) {
 
   return (
     <div>
-      <Accordion>
+      <Accordion
+        sx={{
+          backgroundColor: seasonSeen ? "green" : "white",
+        }}
+      >
         <AccordionSummary
           aria-controls="panel1a-content"
           id="panel1a-header"
@@ -117,7 +123,7 @@ export default function TrackSeasonAccordion(props) {
             <KeyboardDoubleArrowDownIcon></KeyboardDoubleArrowDownIcon>
           }
         >
-          <input type="checkbox" onClick={setSeasonSeen} />
+          <input type="checkbox" onClick={setSeasonSeen} checked={seasonSeen} />
           <Typography>
             {props.title} Season {props.season} accordion
           </Typography>

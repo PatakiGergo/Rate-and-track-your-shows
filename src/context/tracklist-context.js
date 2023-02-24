@@ -19,6 +19,7 @@ export default (props) => {
       title: "asd",
       id: 12,
       img: "asd",
+      seasonsSeen: [],
       episodes: [
         {
           season: 0,
@@ -37,13 +38,19 @@ export default (props) => {
   function addToTracklist(name, id, episodes, img, dataOfUserProgress) {
     setTracklist((current) => {
       if (current.some((item) => item.title === name)) {
-        alert("this is already on your tracklist");
         return [...current];
       } else {
         episodes.seasonSeen = false;
         return [
           ...current,
-          { title: name, id, episodes, img, dataOfUserProgress },
+          {
+            title: name,
+            id,
+            episodes,
+            img,
+            dataOfUserProgress,
+            seasonsSeen: [],
+          },
         ];
       }
     });
@@ -80,13 +87,15 @@ export default (props) => {
   }, [seenEpisodes, setSeenEpisodes, setTracklist]);
 
   const handleSeenSeason = useMemo(() => {
-    return function handleSeenSeason(id, episodeTitle, showTitle) {
+    return function handleSeenSeason(id, episodeTitle, showTitle, season) {
       setTracklist((current) => {
         current.find((show) => {
           if (show.title === showTitle) {
+            show.seasonsSeen.push(season);
             show.episodes.map((episode) => {
               if (episode.name === episodeTitle) {
                 episode.showTitle = showTitle;
+
                 setSeenEpisodes((prev) => [...prev, episode]);
               }
             });
@@ -101,11 +110,16 @@ export default (props) => {
     setTracklist((current) => {
       current.find((show) => {
         if (show.title === showTitle) {
+          const filteredArr = show.seasonsSeen.filter(
+            (item) => item !== season
+          );
+          show.seasonsSeen = filteredArr;
           show.episodes.map((episode) => {
             if (
               episode.name === episodeTitle &&
               episode.showTitle === showTitle
             ) {
+              episode.seasonSeen = false;
               setSeenEpisodes((prev) => prev.filter((item) => item != episode));
             }
           });

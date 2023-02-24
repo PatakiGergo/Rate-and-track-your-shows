@@ -3,6 +3,7 @@ import { ToplistContext } from "@/context/toplist-context";
 import ToplistForm from "../ToplistForm";
 import { Backdrop } from "@mui/material";
 import UserAlert from "../UserAlert";
+import AreYouSure from "../AreYouSure";
 
 export default function AddToToplistButton(props) {
   const toplistContext = useContext(ToplistContext);
@@ -10,6 +11,7 @@ export default function AddToToplistButton(props) {
   const [showModal, setShowModal] = useState(false);
   const [success, setSuccess] = useState(false);
   const [noSuccess, setNoSuccess] = useState(false);
+  const [sureModal, setSureModal] = useState(false);
 
   function handleToplist() {
     if (toplistContext.toplistItems.some((item) => item.title === props.name)) {
@@ -17,12 +19,16 @@ export default function AddToToplistButton(props) {
       setTimeout(() => {
         setNoSuccess(false);
       }, 1500);
+    } else if (props.from === "tracklist" && props.progress < 1) {
+      setSureModal(!sureModal);
+      return;
     } else {
       setShowModal(!showModal);
     }
   }
 
   function handleClose() {
+    handleNo();
     setShowModal(!showModal);
   }
 
@@ -31,6 +37,14 @@ export default function AddToToplistButton(props) {
     setTimeout(() => {
       setSuccess(false);
     }, 1500);
+  }
+
+  function handleYes() {
+    setShowModal(!showModal);
+  }
+
+  function handleNo() {
+    setSureModal(false);
   }
 
   return (
@@ -47,6 +61,16 @@ export default function AddToToplistButton(props) {
           message={`${props.name} successfully added to your toplist`}
         ></UserAlert>
       )}
+      {sureModal && (
+        <AreYouSure
+          question={
+            "You didnt finish, are you sure you want to add it to your toplist?"
+          }
+          yesHandler={handleYes}
+          noHandler={handleNo}
+          open={sureModal}
+        />
+      )}
       {showModal && (
         <>
           <Backdrop
@@ -58,7 +82,7 @@ export default function AddToToplistButton(props) {
               <ToplistForm
                 name={props.name}
                 imdbID={props.id}
-                img={props.img}
+                img={props.image}
                 handleModal={handleToplist}
                 id={props.id}
                 handleSuccess={handleSuccess}

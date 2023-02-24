@@ -27,7 +27,20 @@ export default function TracklistForm(props) {
     ).then((res) =>
       res
         .json()
-        .then((data) => setEpisodeData(data))
+        .then((data) => {
+          tracklist.addMovie(
+            data.name,
+            data.externals.imdb,
+            data._embedded.episodes,
+            data.image.medium
+          );
+          watchlistContext.remove(
+            episodeData.externals.imdb
+              ? episodeData.externals.imdb
+              : episodeData.id
+          );
+          props.handleSuccess();
+        })
         .catch()
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,7 +52,7 @@ export default function TracklistForm(props) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  /*   const onSubmit = (data) => {
     //a data a user progress
     tracklist.addMovie(
       episodeData.name,
@@ -54,16 +67,16 @@ export default function TracklistForm(props) {
     );
 
     props.handleSuccess();
-  };
+  }; */
 
-  handleSubmit(onSubmit);
+  /*  handleSubmit(onSubmit); */
 
   return (
     <>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      {/*   <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <h1>Are you sure?</h1>
         <button type="submit">Yes</button>
-      </form>
+      </form> */}
     </>
   );
 }

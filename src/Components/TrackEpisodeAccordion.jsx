@@ -30,7 +30,15 @@ export default function TrackEpisodeAccordion(props) {
 
   return (
     <>
-      <Accordion>
+      <Accordion
+        sx={{
+          backgroundColor:
+            tracklistContext.seenEpisodes.includes(props.data) ||
+            props.seasonSeen
+              ? "green"
+              : "white",
+        }}
+      >
         <AccordionSummary
           aria-controls="panel1a-content"
           id="panel1a-header"
@@ -50,7 +58,7 @@ export default function TrackEpisodeAccordion(props) {
                 ? true
                 : tracklistContext.seenEpisodes.includes(props.data)
             }
-            disabled={props.seasonSeen}
+            disabled={props.seen?.includes(props.season)}
           />
           <Typography>{props.episode}</Typography>
         </AccordionSummary>

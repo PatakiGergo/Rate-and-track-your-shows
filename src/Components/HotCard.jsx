@@ -14,12 +14,16 @@ export default function HotCard(props) {
         <p>{props.description}</p>
       </div>
       <div className="hot-card-buttons">
-       <AddToToplistButton name={props.title} id={props.id} img={props.img}></AddToToplistButton>
+        <AddToToplistButton
+          name={props.title}
+          id={props.id}
+          image={props.image}
+        ></AddToToplistButton>
         <AddToTracklist name={props.title}></AddToTracklist>
         <AddToWatchlistButton
           name={props.title}
           imdbId={props.id}
-          image={props.image}
+          img={props.image}
           description={props.description}
         ></AddToWatchlistButton>
       </div>

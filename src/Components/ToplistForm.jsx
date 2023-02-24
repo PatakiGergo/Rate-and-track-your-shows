@@ -23,7 +23,7 @@ export default function ToplistForm(props) {
           Number(data.overall_experience)) /
         5,
     };
-    toplistContext.addMovie(props.name, props.id, props.img, userReview);
+    toplistContext.addMovie(props.name, props.id, props.image, userReview);
     props.handleModal();
     props.handleSuccess();
     tracklistContext.remove(props.id);
@@ -31,6 +31,7 @@ export default function ToplistForm(props) {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      
       <h1>Rate the show!</h1>
       <label htmlFor="">Plot:</label>
       <input

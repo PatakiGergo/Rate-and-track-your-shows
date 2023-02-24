@@ -5,6 +5,7 @@ import MoreInfo from "./Buttons/MoreInfo";
 
 export default function ToplistCard(props) {
   const imdbId = props.imdbID;
+  console.log("toplist props", props);
 
   return (
     <div className="toplist-card">
@@ -26,21 +27,12 @@ export default function ToplistCard(props) {
         <h1>{props.title} </h1>
         <h1>Overall rating: {props.data.overall_user_score}% </h1>
 
-        {/*   <h2>{props.imdbID} </h2> */}
-
-        {/*  <h3>Music {props.data.music} </h3>
-        <h3>Plot {props.data.plot} </h3>
-        <h3>Characters {props.data.characters} </h3>
-        <h3>Acting{props.data.acting} </h3>
-        <h3>Overall experience {props.data.overall_experience} </h3> */}
         <h3>Review {props.data.review} </h3>
-        <h3>Disliked {props.data.disliked} </h3>
-        <h3>Liked {props.data.liked} </h3>
 
         {/* <h3>Recommendation {props.data.recommendation} </h3> */}
       </div>
       <div className="buttondiv">
-        <MoreInfo show={props.title} />
+        <MoreInfo show={props.title} data={props.data} />
         <RemoveButton type={"toplist-delete"} id={props.id} />
       </div>
     </div>

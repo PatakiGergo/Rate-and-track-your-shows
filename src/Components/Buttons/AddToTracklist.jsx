@@ -73,20 +73,12 @@ export default function AddToTracklist(props) {
       <button onClick={handleTrack}>Add to tracklist</button>
       {showTrackModal && (
         <>
-          <Backdrop
-            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={showTrackModal}
-            onClick={handleTrackClose}
-          >
-            <div onClick={(e) => e.stopPropagation()}>
-              <TracklistForm
-                show={props.name}
-                handleModal={handleTrack}
-                id={props.id}
-                handleSuccess={successAlert}
-              />
-            </div>
-          </Backdrop>
+          <TracklistForm
+            show={props.name}
+            handleModal={handleTrack}
+            id={props.id}
+            handleSuccess={successAlert}
+          />
         </>
       )}
     </>
