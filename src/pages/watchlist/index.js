@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import WatchlistCard from "@/Components/WatchListCard";
+import WatchlistCard from "@/Components/Watchlist/WatchListCard";
 import { WatchlistContext } from "@/context/watchlist-context";
 import Head from "next/head";
 

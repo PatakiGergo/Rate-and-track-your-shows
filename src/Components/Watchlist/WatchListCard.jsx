@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { WatchlistContext } from "@/context/watchlist-context";
-import RemoveButton from "./Buttons/RemoveButton";
-import AddToToplistButton from "./Buttons/AddToToplist";
-import AddToTracklist from "./Buttons/AddToTracklist";
+import RemoveButton from "../Buttons/RemoveButton";
+import AddToToplistButton from "../Buttons/AddToToplist";
+import AddToTracklist from "../Buttons/AddToTracklist";
 
 export default function WatchlistCard(props) {
   const id = props.imdbID;

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 import { TracklistContext } from "@/context/tracklist-context";
-import OngoingCard from "@/Components/OngoingCard";
+import OngoingCard from "@/Components/Tracking/OngoingCard";
 import Head from "next/head";
 
 export default function Tracklist(props) {

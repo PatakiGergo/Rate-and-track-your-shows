@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 
-import RemoveButton from "./Buttons/RemoveButton";
-import MoreInfo from "./Buttons/MoreInfo";
+import RemoveButton from "../Buttons/RemoveButton";
+import MoreInfo from "./MoreInfo";
+import IMDBCard from "../UI/IMDBCard";
 
 export default function ToplistCard(props) {
   const imdbId = props.imdbID;
@@ -13,17 +14,7 @@ export default function ToplistCard(props) {
         <img className="toplist-image" src={props.img} alt="" />
       </div>
       <div>
-        <a
-          href={`https://www.imdb.com/title/${props.imdbID}/`}
-          rel="noreferrer"
-          target="_blank"
-        >
-          <img
-            className="toplist-info"
-            src="https://logos-world.net/wp-content/uploads/2022/04/IMDb-Emblem.png"
-            alt=""
-          />
-        </a>
+        <IMDBCard title={props.title} ImdbID={imdbId}></IMDBCard>
         <h1>{props.title} </h1>
         <h1>Overall rating: {props.data.overall_user_score}% </h1>
 

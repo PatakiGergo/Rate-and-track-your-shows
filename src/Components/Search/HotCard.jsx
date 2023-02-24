@@ -1,7 +1,7 @@
 import React from "react";
-import AddToTracklist from "./Buttons/AddToTracklist";
-import AddToWatchlistButton from "./Buttons/AddToWatchlist";
-import AddToToplistButton from "./Buttons/AddToToplist";
+import AddToTracklist from "../Buttons/AddToTracklist";
+import AddToWatchlistButton from "../Buttons/AddToWatchlist";
+import AddToToplistButton from "../Buttons/AddToToplist";
 
 export default function HotCard(props) {
   return (

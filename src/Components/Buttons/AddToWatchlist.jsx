@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { WatchlistContext } from "@/context/watchlist-context";
 import { ToplistContext } from "@/context/toplist-context";
 import { TracklistContext } from "@/context/tracklist-context";
-import UserAlert from "../UserAlert";
+import UserAlert from "../Alerts/UserAlert";
 
 export default function AddToWatchlistButton(props) {
   const watchlistContext = useContext(WatchlistContext);

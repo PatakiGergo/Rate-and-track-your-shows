@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
-import TracklistForm from "../TracklistForm";
+import TracklistForm from "../Tracking/TracklistForm";
 import { ToplistContext } from "@/context/toplist-context";
-import UserAlert from "../UserAlert";
+import UserAlert from "../Alerts/UserAlert";
 import { TracklistContext } from "@/context/tracklist-context";
 
 //fromwherepropot csinálni és akkor onnan removeolja

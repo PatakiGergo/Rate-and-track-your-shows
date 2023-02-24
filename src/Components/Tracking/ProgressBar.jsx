@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import UserAlert from "./UserAlert";
+import UserAlert from "../Alerts/UserAlert";
 import LinearProgress from "@mui/material/LinearProgress";
 
 export default function ProgressBar(props) {

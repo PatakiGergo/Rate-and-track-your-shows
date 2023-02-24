@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import Sidebar from "@/Components/Sidebar";
+import Sidebar from "@/Components/UI/Sidebar";
 import "@/styles/layout.css";
 import "@/styles/searchcard.css";
 import "@/styles/searchbar.css";

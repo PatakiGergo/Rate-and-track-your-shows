@@ -4,7 +4,7 @@ import { TracklistContext } from "@/context/tracklist-context";
 
 import { WatchlistContext } from "@/context/watchlist-context";
 import OngoingCard from "./OngoingCard";
-import UserAlert from "./UserAlert";
+import UserAlert from "../Alerts/UserAlert";
 
 export default function TracklistForm(props) {
   const watchlistContext = useContext(WatchlistContext);

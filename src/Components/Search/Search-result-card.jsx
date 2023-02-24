@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 
-import AddToWatchlistButton from "./Buttons/AddToWatchlist";
-import AddToToplistButton from "./Buttons/AddToToplist";
-import AddToTracklist from "./Buttons/AddToTracklist";
+import AddToWatchlistButton from "../Buttons/AddToWatchlist";
+import AddToToplistButton from "../Buttons/AddToToplist";
+import AddToTracklist from "../Buttons/AddToTracklist";
+import IMDBCard from "../UI/IMDBCard";
 
 export default function SearchResultCard(props) {
   const description = props.description;
@@ -19,6 +20,7 @@ export default function SearchResultCard(props) {
   return (
     <>
       <div className="searchcard-container">
+        <IMDBCard ImdbID={props.imdbID} title={props.name}></IMDBCard>
         <div className="container-card">
           <img src={props.image} alt={`Image of ${props.name}`} />
 

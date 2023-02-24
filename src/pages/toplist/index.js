@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import ToplistCard from "@/Components/ToplistCard";
+import ToplistCard from "@/Components/Toplist/ToplistCard";
 import { ToplistContext } from "@/context/toplist-context";
-import Sorting from "@/Components/Sorting";
+import Sorting from "@/Components/Toplist/Sorting";
 import Head from "next/head";
 
 export default function Toplist() {

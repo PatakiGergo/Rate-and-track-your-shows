@@ -1,7 +1,7 @@
-import Searchbar from "@/Components/Searchbar";
-import SearchResultCard from "@/Components/Search-result-card";
+import Searchbar from "@/Components/Search/Searchbar";
+import SearchResultCard from "@/Components/Search/Search-result-card";
 import React from "react";
-import HotCard from "@/Components/HotCard";
+import HotCard from "@/Components/Search/HotCard";
 import Head from "next/head";
 
 export default function Search() {

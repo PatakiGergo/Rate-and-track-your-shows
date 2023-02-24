@@ -1,9 +1,9 @@
 import React, { useContext, useState, useReducer } from "react";
 import { ToplistContext } from "@/context/toplist-context";
-import ToplistForm from "../ToplistForm";
+import ToplistForm from "../Toplist/ToplistForm";
 import { Backdrop } from "@mui/material";
-import UserAlert from "../UserAlert";
-import AreYouSure from "../AreYouSure";
+import UserAlert from "../Alerts/UserAlert";
+import AreYouSure from "../Alerts/AreYouSure";
 
 export default function AddToToplistButton(props) {
   const toplistContext = useContext(ToplistContext);
