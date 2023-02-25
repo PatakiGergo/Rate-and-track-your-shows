@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, memo } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -7,13 +7,7 @@ import TrackEpisodeAccordion from "./TrackEpisodeAccordion";
 import { TracklistContext } from "@/context/tracklist-context";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
-export default function TrackSeasonAccordion({
-  episodes,
-  season,
-  title,
-  wholeSeries,
-  seen,
-}) {
+function TrackSeasonAccordion({ episodes, season, title, wholeSeries, seen }) {
   const tracklistContext = useContext(TracklistContext);
   const trackedShows = tracklistContext.tracklistItems;
 
@@ -125,3 +119,5 @@ export default function TrackSeasonAccordion({
     </div>
   );
 }
+
+export default memo(TrackSeasonAccordion);

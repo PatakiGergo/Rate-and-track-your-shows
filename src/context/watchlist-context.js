@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 export const WatchlistContext = React.createContext({
   watchlistItems: [],
@@ -27,6 +27,17 @@ export default (props) => {
       return current.filter((item) => item.id !== id);
     });
   }
+
+  useEffect(() => {
+    const watchlistItem = JSON.parse(localStorage.getItem("watchlist"));
+    if (watchlistItems[0]?.title === "asd") {
+      setWatchlist(watchlistItem);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+  }, [watchlist]);
 
   return (
     <WatchlistContext.Provider

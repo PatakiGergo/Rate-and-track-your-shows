@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const ToplistContext = React.createContext({
   toplistItems: [],
@@ -61,6 +61,18 @@ export default (props) => {
       return current.filter((item) => item.id !== id);
     });
   }
+
+  useEffect(() => {
+    const toplistItem = JSON.parse(localStorage.getItem("toplist"));
+
+    if (toplistItem[0]?.title !== "Add your first movie") {
+      setToplist(toplistItem);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("toplist", JSON.stringify(toplist));
+  }, [toplist]);
 
   return (
     <ToplistContext.Provider

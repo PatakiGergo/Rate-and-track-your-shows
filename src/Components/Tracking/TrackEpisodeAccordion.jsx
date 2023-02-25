@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, memo } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { TracklistContext } from "@/context/tracklist-context";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
-export default function TrackEpisodeAccordion({
+function TrackEpisodeAccordion({
   summary,
   id,
   data,
@@ -71,3 +71,5 @@ export default function TrackEpisodeAccordion({
     </>
   );
 }
+
+export default memo(TrackEpisodeAccordion);

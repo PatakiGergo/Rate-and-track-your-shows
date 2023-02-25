@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const TracklistContext = React.createContext({
   tracklistItems: [],
@@ -152,6 +152,25 @@ export default (props) => {
     });
     return seenEpisodes;
   }
+
+  useEffect(() => {
+    const tracklistItem = JSON.parse(localStorage.getItem("tracklist"));
+    const seenEpisodeItem = JSON.parse(localStorage.getItem("seenEpisodes"));
+
+    if (tracklistItem[0]?.title !== "asd") {
+      console.log("got item ez az", tracklistItem);
+
+      setTracklist(tracklistItem);
+      setSeenEpisodes(seenEpisodeItem);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tracklist", JSON.stringify(tracklist));
+    localStorage.setItem("seenEpisodes", JSON.stringify(seenEpisodes));
+  }, [tracklist, seenEpisodes]);
+
+
 
   return (
     <TracklistContext.Provider
