@@ -7,19 +7,20 @@ import TrackEpisodeAccordion from "./TrackEpisodeAccordion";
 import { TracklistContext } from "@/context/tracklist-context";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
-export default function TrackSeasonAccordion(props) {
+export default function TrackSeasonAccordion({
+  episodes,
+  season,
+  title,
+  wholeSeries,
+  seen,
+}) {
   const tracklistContext = useContext(TracklistContext);
   const trackedShows = tracklistContext.tracklistItems;
-  const episodes = props.episodes;
-  const season = props.season;
-  const title = props.title;
-  const wholeSeries = props.wholeSeries;
-  const seen = props.seen;
 
   const [seasonSeen, setWholeSeasonSeen] = useState(seen?.includes(season));
 
   const episodeAccordion = [
-    <TrackEpisodeAccordion season={props.season} key={"placeholder"} />,
+    <TrackEpisodeAccordion season={season} key={"placeholder"} />,
   ];
 
   function findShow(title) {
@@ -45,12 +46,7 @@ export default function TrackSeasonAccordion(props) {
     const episodes = show.episodes;
     episodes.forEach((episode) => {
       if (episode.id === id) {
-        tracklistContext.handleSeenSeason(
-          id,
-          episode.name,
-          show.title,
-          props.season
-        );
+        tracklistContext.handleSeenSeason(id, episode.name, show.title, season);
         return;
       }
     });

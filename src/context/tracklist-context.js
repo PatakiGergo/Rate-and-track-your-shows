@@ -1,4 +1,4 @@
-import React, { useState, useContext, useMemo } from "react";
+import React, { useState } from "react";
 
 export const TracklistContext = React.createContext({
   tracklistItems: [],
@@ -34,7 +34,13 @@ export default (props) => {
 
   //Seen Episodes stored in objects
   const [seenEpisodes, setSeenEpisodes] = useState([
-    { id: "asd", url: "kek", name: "aaa", season: 4, number: 5 },
+    {
+      id: "idexample",
+      url: "example",
+      name: "placeholder",
+      season: 4,
+      number: 5,
+    },
   ]);
 
   //Adding to tracklist with checking if it's already there or not
@@ -48,7 +54,7 @@ export default (props) => {
       seasonsSeen: [],
     };
     setTracklist((current) => {
-      if (current.some((item) => item.title === name)) {
+      if (current.some(({ title }) => title === name)) {
         return [...current];
       } else {
         episodes.seasonSeen = false;
@@ -66,14 +72,14 @@ export default (props) => {
 
   //finding the show ticked by the user
   function findShow(store, titleOfShow) {
-    const showObject = store.find((show) => show.title === titleOfShow);
+    const showObject = store.find(({ title }) => title === titleOfShow);
     return showObject;
   }
 
   //finding the episode of the show ticked by the user
   function findEpisodeOfShow(show, titleOfEpisode) {
     const episodeObject = show.episodes.find(
-      (episode) => episode.name === titleOfEpisode
+      ({ name }) => name === titleOfEpisode
     );
     return episodeObject;
   }
@@ -81,21 +87,21 @@ export default (props) => {
   //Adding it to the state
   function addToSeenEpisodes(episode) {
     if (seenEpisodes.includes(episode)) {
-      setSeenEpisodes((prev) => {
-        return prev.filter((item) => item.name !== episode.name);
+      setSeenEpisodes((seenEpisodes) => {
+        return seenEpisodes.filter((item) => item.name !== episode.name);
       });
     } else {
-      setSeenEpisodes((prev) => [...prev, episode]);
+      setSeenEpisodes((seenEpisodes) => [...seenEpisodes, episode]);
     }
   }
 
   //Handling episode seen by the user
   function handleSeen(id, episodeTitle, showTitle) {
-    setTracklist((current) => {
-      const show = findShow(current, showTitle);
+    setTracklist((currentTracklist) => {
+      const show = findShow(currentTracklist, showTitle);
       const episode = findEpisodeOfShow(show, episodeTitle);
       addToSeenEpisodes(episode);
-      return current;
+      return currentTracklist;
     });
   }
 
@@ -104,7 +110,7 @@ export default (props) => {
     setTracklist((current) => {
       const show = findShow(current, showTitle);
       show.seasonsSeen.push(season);
-      show.episodes.map((episode) => {
+      show.episodes.forEach((episode) => {
         if (episode.name === episodeTitle) {
           episode.showTitle = showTitle;
 
@@ -125,10 +131,10 @@ export default (props) => {
     setTracklist((current) => {
       const show = findShow(current, showTitle);
       show.seasonsSeen = filtering(show, "seasonsSeen", season);
-      show.episodes.map((episode) => {
+      show.episodes.forEach((episode) => {
         if (episode.name === episodeTitle && episode.showTitle === showTitle) {
           episode.seasonSeen = false;
-          setSeenEpisodes((prev) => prev.filter((item) => item != episode));
+          setSeenEpisodes((prev) => prev.filter((item) => item !== episode));
         }
       });
       return current;
@@ -139,7 +145,7 @@ export default (props) => {
   function calculateProgress(title) {
     let seenEpisodes = 0;
     const show = findShow(tracklist, title);
-    show.episodes.map((episode) => {
+    show.episodes.forEach((episode) => {
       if (episode.seen) {
         seenEpisodes++;
       }

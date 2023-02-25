@@ -2,20 +2,19 @@ import React, { useState, useContext, useEffect } from "react";
 import UserAlert from "../Alerts/UserAlert";
 import LinearProgress from "@mui/material/LinearProgress";
 
-export default function ProgressBar(props) {
+export default function ProgressBar({ title, progress }) {
   const [finished, setFinished] = useState(false);
-  const progress = Math.floor(props.progress * 100);
-  const title = props.title;
+  const userProgress = Math.floor(progress * 100);
 
   //Whenever the user finishes it sends an alert
   useEffect(() => {
-    if (progress === 100) {
+    if (userProgress === 100) {
       setFinished(true);
       setTimeout(() => {
         setFinished(false);
       }, 3000);
     }
-  }, [progress]);
+  }, [userProgress]);
 
   return (
     <>
@@ -26,11 +25,11 @@ export default function ProgressBar(props) {
         ></UserAlert>
       )}
       <div className="bar">
-        <h1>Progress: {progress} %</h1>
+        <h1>Progress: {userProgress} %</h1>
         <LinearProgress
           color={"secondary"}
           variant="determinate"
-          value={progress}
+          value={userProgress}
           sx={{
             height: "10px",
             backgroundColor: "white",

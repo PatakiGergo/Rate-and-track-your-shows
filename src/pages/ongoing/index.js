@@ -4,30 +4,30 @@ import { TracklistContext } from "@/context/tracklist-context";
 import OngoingCard from "@/Components/Tracking/OngoingCard";
 import Head from "next/head";
 
-export default function Tracklist(props) {
+export default function Tracklist() {
   const tracklist = useContext(TracklistContext).tracklistItems;
 
-  const tracklistItems = tracklist.map((item) => {
-    return (
-      <OngoingCard
-        title={item.title}
-        imdbID={item.id}
-        key={item.id}
-        episodes={item.episodes}
-        img={item.img}
-        seasonsSeen={item.seasonsSeen}
-      />
-    );
-  });
+  const tracklistItems = tracklist.map(
+    ({ title, id, episodes, img, seasonsSeen }) => {
+      return (
+        <OngoingCard
+          title={title}
+          imdbID={id}
+          key={id}
+          episodes={episodes}
+          img={img}
+          seasonsSeen={seasonsSeen}
+        />
+      );
+    }
+  );
 
   return (
-    <html>
+    <>
       <Head>
         <title>Tracklist</title>
       </Head>
-      <body>
-        <div className="tracklist-container">{tracklistItems}</div>;
-      </body>
-    </html>
+      <section className="tracklist-container">{tracklistItems}</section>;
+    </>
   );
 }

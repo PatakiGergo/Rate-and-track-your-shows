@@ -4,7 +4,12 @@ import { ToplistContext } from "@/context/toplist-context";
 import { TracklistContext } from "@/context/tracklist-context";
 import UserAlert from "../Alerts/UserAlert";
 
-export default function AddToWatchlistButton(props) {
+export default function AddToWatchlistButton({
+  name,
+  imdbID,
+  image,
+  description,
+}) {
   const watchlistContext = useContext(WatchlistContext);
   const toplistContext = useContext(ToplistContext);
   const tracklistContext = useContext(TracklistContext);
@@ -12,39 +17,29 @@ export default function AddToWatchlistButton(props) {
   const [list, setList] = useState("Toplist");
   const [added, setAdded] = useState(false);
 
+  function delay(timeInMs) {
+    setNoSuccess(true);
+    setTimeout(() => {
+      setNoSuccess(false);
+    }, timeInMs);
+  }
+
   function watchlistHandler() {
-    if (toplistContext.toplistItems.some((item) => item.title === props.name)) {
-      setNoSuccess(true);
-      setTimeout(() => {
-        setNoSuccess(false);
-      }, 1500);
+    if (toplistContext.toplistItems.some((item) => item.title === name)) {
     } else if (
-      tracklistContext.tracklistItems.some((item) => item.title === props.name)
+      tracklistContext.tracklistItems.some((item) => item.title === name)
     ) {
       setList("tracklist");
-      setNoSuccess(true);
-      setTimeout(() => {
-        setNoSuccess(false);
-      }, 1500);
+      delay(1500);
     } else if (
-      watchlistContext.watchlistItems.some((item) => item.title === props.name)
+      watchlistContext.watchlistItems.some((item) => item.title === name)
     ) {
       setList("watchlist");
-      setNoSuccess(true);
-      setTimeout(() => {
-        setNoSuccess(false);
-      }, 1500);
+      delay(1500);
     } else {
-      watchlistContext.addMovie(
-        props.name,
-        props.imdbID,
-        props.image,
-        props.description
-      );
+      watchlistContext.addMovie(name, imdbID, image, description);
       setAdded(true);
-      setTimeout(() => {
-        setAdded(false);
-      }, 1500);
+      delay(1500);
     }
   }
 
@@ -53,18 +48,16 @@ export default function AddToWatchlistButton(props) {
       {added && (
         <UserAlert
           type={"success"}
-          message={`${props.name} successfully added to your watchlist `}
+          message={`${name} successfully added to your watchlist `}
         ></UserAlert>
       )}
       {noSuccess && (
         <UserAlert
           type={"error"}
-          message={`${props.name} is already on your ${list}`}
+          message={`${name} is already on your ${list}`}
         ></UserAlert>
       )}
-      <button className={props.class} onClick={watchlistHandler}>
-        Watchlist
-      </button>
+      <button onClick={watchlistHandler}>Watchlist</button>
     </>
   );
 }

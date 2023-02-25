@@ -5,7 +5,7 @@ import { Backdrop } from "@mui/material";
 import UserAlert from "../Alerts/UserAlert";
 import AreYouSure from "../Alerts/AreYouSure";
 
-export default function AddToToplistButton(props) {
+export default function AddToToplistButton({ name, id, progress, from, img }) {
   const toplistContext = useContext(ToplistContext);
 
   const [showModal, setShowModal] = useState(false);
@@ -13,13 +13,17 @@ export default function AddToToplistButton(props) {
   const [noSuccess, setNoSuccess] = useState(false);
   const [sureModal, setSureModal] = useState(false);
 
+  function delay(timeInMs) {
+    setNoSuccess(true);
+    setTimeout(() => {
+      setNoSuccess(false);
+    }, timeInMs);
+  }
+
   function handleToplist() {
-    if (toplistContext.toplistItems.some((item) => item.title === props.name)) {
-      setNoSuccess(true);
-      setTimeout(() => {
-        setNoSuccess(false);
-      }, 1500);
-    } else if (props.from === "tracklist" && props.progress < 1) {
+    if (toplistContext.toplistItems.some((item) => item.title === name)) {
+      delay(1500);
+    } else if (from === "tracklist" && progress < 1) {
       setSureModal(!sureModal);
       return;
     } else {
@@ -52,13 +56,13 @@ export default function AddToToplistButton(props) {
       {noSuccess && (
         <UserAlert
           type={"error"}
-          message={`${props.name} is already on your toplist`}
+          message={`${name} is already on your toplist`}
         ></UserAlert>
       )}
       {success && (
         <UserAlert
           type={"success"}
-          message={`${props.name} successfully added to your toplist`}
+          message={`${name} successfully added to your toplist`}
         ></UserAlert>
       )}
       {sureModal && (
@@ -80,20 +84,18 @@ export default function AddToToplistButton(props) {
           >
             <div onClick={(e) => e.stopPropagation()}>
               <ToplistForm
-                name={props.name}
-                imdbID={props.id}
-                img={props.image}
+                name={name}
+                imdbID={id}
+                img={img}
                 handleModal={handleToplist}
-                id={props.id}
+                id={id}
                 handleSuccess={handleSuccess}
               />
             </div>
           </Backdrop>
         </>
       )}
-      <button className={props.class} onClick={handleToplist}>
-        Add to toplist
-      </button>
+      <button onClick={handleToplist}>Add to toplist</button>
     </>
   );
 }

@@ -7,21 +7,17 @@ import Head from "next/head";
 export default function Search() {
   const [results, setResults] = React.useState([]);
 
-  const resultArr = results.map((item) => {
+  const resultArr = results.map(({ show }) => {
+    const { image, name, summary, genres, externals, id } = show;
+
     return (
       <SearchResultCard
-        name={item.show.name}
-        image={
-          item.show.image?.medium
-            ? item.show.image?.medium
-            : item.show.image?.src
-        }
-        key={item.show.id}
-        imdbID={
-          item.show.externals.imdb ? item.show.externals.imdb : item.show.id
-        }
-        description={item.show.summary}
-        genres={item.show.genres}
+        name={name}
+        image={image?.medium ? image?.medium : image?.src}
+        key={id}
+        imdbID={externals.imdb ? externals.imdb : id}
+        description={summary}
+        genres={genres}
       />
     );
   });
@@ -36,11 +32,11 @@ export default function Search() {
   }
 
   return (
-    <html>
+    <>
       <Head>
         <title>Search</title>
       </Head>
-      <body>
+      <section>
         <div className="search-main">
           <Searchbar handleSearch={searching}></Searchbar>
           {resultArr}
@@ -90,7 +86,7 @@ export default function Search() {
             </div>
           </div>
         </div>
-      </body>
-    </html>
+      </section>
+    </>
   );
 }

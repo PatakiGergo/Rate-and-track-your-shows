@@ -1,13 +1,10 @@
 import React, { useContext, useState } from "react";
-import Backdrop from "@mui/material/Backdrop";
 import TracklistForm from "../Tracking/TracklistData";
 import { ToplistContext } from "@/context/toplist-context";
 import UserAlert from "../Alerts/UserAlert";
 import { TracklistContext } from "@/context/tracklist-context";
 
-//fromwherepropot csinálni és akkor onnan removeolja
-
-export default function AddToTracklist(props) {
+export default function AddToTracklist({ name, id }) {
   const tracklistContext = useContext(TracklistContext);
   const toplistContext = useContext(ToplistContext);
   const [showTrackModal, setTrackModal] = useState(false);
@@ -28,21 +25,22 @@ export default function AddToTracklist(props) {
   const [noSuccess, setNoSuccess] = useState(false);
   const [list, setList] = useState("toplist");
 
+  function delay(timeInMs) {
+    setNoSuccess(true);
+    setTimeout(() => {
+      setNoSuccess(false);
+    }, timeInMs);
+  }
+
   function handleTrack() {
-    if (toplistContext.toplistItems.some((item) => item.title === props.name)) {
+    if (toplistContext.toplistItems.some((item) => item.title === name)) {
       /* alert("It's already on your toplist"); */
-      setNoSuccess(true);
-      setTimeout(() => {
-        setNoSuccess(false);
-      }, 1500);
+      delay(1500);
     } else if (
-      tracklistContext.tracklistItems.some((item) => item.title === props.name)
+      tracklistContext.tracklistItems.some((item) => item.title === name)
     ) {
       setList("tracklist");
-      setNoSuccess(true);
-      setTimeout(() => {
-        setNoSuccess(false);
-      }, 1500);
+      delay(1500);
     } else {
       setTrackModal(!showTrackModal);
     }
@@ -74,9 +72,9 @@ export default function AddToTracklist(props) {
       {showTrackModal && (
         <>
           <TracklistForm
-            show={props.name}
+            show={name}
             handleModal={handleTrack}
-            id={props.id}
+            id={id}
             handleSuccess={successAlert}
           />
         </>

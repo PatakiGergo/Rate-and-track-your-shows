@@ -13,7 +13,7 @@ export default (props) => {
   //adding movies to watchlist with, chenking if it's already there or not
   function addToWatchlist(name, id, image, description) {
     setWatchlist((current) => {
-      if (current.some((item) => item.title === name)) {
+      if (current.some(({ title }) => title === name)) {
         return [...current];
       } else {
         return [...current, { title: name, id, image, description }];

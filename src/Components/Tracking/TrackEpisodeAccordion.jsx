@@ -6,9 +6,17 @@ import Typography from "@mui/material/Typography";
 import { TracklistContext } from "@/context/tracklist-context";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
-export default function TrackEpisodeAccordion(props) {
+export default function TrackEpisodeAccordion({
+  summary,
+  id,
+  data,
+  seen,
+  season,
+  seasonSeen,
+  checkmarkHandler,
+  episode,
+}) {
   const tracklistContext = useContext(TracklistContext);
-  const summary = props.summary;
 
   const episodeSummary = () => {
     const wrapper = document.createElement("div");
@@ -21,7 +29,7 @@ export default function TrackEpisodeAccordion(props) {
   //code duplicationt majd fixálni
 
   function handleClick(e) {
-    props.checkmarkHandler(props.id);
+    checkmarkHandler(id);
     e.stopPropagation();
   }
 
@@ -30,8 +38,7 @@ export default function TrackEpisodeAccordion(props) {
       <Accordion
         sx={{
           backgroundColor:
-            tracklistContext.seenEpisodes.includes(props.data) ||
-            props.seasonSeen
+            tracklistContext.seenEpisodes.includes(data) || seasonSeen
               ? "green"
               : "white",
         }}
@@ -51,13 +58,11 @@ export default function TrackEpisodeAccordion(props) {
             type="checkbox"
             onClick={handleClick}
             checked={
-              props.seasonSeen
-                ? true
-                : tracklistContext.seenEpisodes.includes(props.data)
+              seasonSeen ? true : tracklistContext.seenEpisodes.includes(data)
             }
-            disabled={props.seen?.includes(props.season)}
+            disabled={seen?.includes(season)}
           />
-          <Typography>{props.episode}</Typography>
+          <Typography>{episode}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>{episodeSummary()} </Typography>

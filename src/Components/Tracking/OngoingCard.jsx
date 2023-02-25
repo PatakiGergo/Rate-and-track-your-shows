@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useContext, useState } from "react";
 import { TracklistContext } from "@/context/tracklist-context";
 import ProgressBar from "./ProgressBar";
@@ -5,14 +6,16 @@ import TrackSeasonAccordion from "./TrackSeasonAccordion";
 import RemoveButton from "../Buttons/RemoveButton";
 import AddToToplistButton from "../Buttons/AddToToplist";
 
-export default function OngoingCard(props) {
+export default function OngoingCard({
+  episodes,
+  title,
+  imdbID,
+  seasonsSeen,
+  img,
+}) {
   //Card that contains the season and episode accordions
   const tracklist = useContext(TracklistContext);
-  const episodes = props.episodes;
-  const title = props.title;
   const seasonAccordionsArr = [];
-  const id = props.imdbID;
-  const seasonsSeen = props.seasonsSeen;
   const numberOfEpisodes = episodes.length;
 
   //rendering an accordion for each season there by checking the last elements season property
@@ -53,20 +56,19 @@ export default function OngoingCard(props) {
   }
 
   return (
-    <div className="ongoing">
+    <section className="ongoing">
       <div className="tracklist-card-image">
-        <img src={props.img} alt={`Image of ${title}`} />
+        <img src={img} alt={`Image of ${title}`} />
       </div>
       <div>
         <h1>Your {title} progress</h1>
         {seasonAccordions && seasonAccordionsArr}
-        <div></div>
 
         <div className="ongoing-card-buttons">
-          <RemoveButton type={"tracklist-delete"} id={id} />
+          <RemoveButton type={"tracklist-delete"} id={imdbID} />
           <AddToToplistButton
             name={title}
-            id={id}
+            id={imdbID}
             from={"tracklist"}
             progress={calculateProgress()}
           ></AddToToplistButton>
@@ -74,6 +76,6 @@ export default function OngoingCard(props) {
 
         <ProgressBar title={title} progress={calculateProgress()} />
       </div>
-    </div>
+    </section>
   );
 }

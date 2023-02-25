@@ -6,29 +6,29 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const AreYouSure = (props) => {
-  const [open, setOpen] = React.useState(props.open);
+const AreYouSure = ({ open, question, yesHandler, noHandler }) => {
+  const [opened, setOpened] = React.useState(open);
 
   function handleYes() {
-    setOpen(false);
-    props.yesHandler();
+    setOpened(false);
+    yesHandler();
   }
 
   function handleNo() {
-    setOpen(false);
-    props.noHandler();
+    setOpened(false);
+    noHandler();
   }
 
   return (
     <div>
       <Dialog
-        open={open}
+        open={opened}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {props.question}
+            {question}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

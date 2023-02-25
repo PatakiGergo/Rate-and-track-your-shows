@@ -7,35 +7,34 @@ import Head from "next/head";
 export default function Toplist() {
   const toplist = useContext(ToplistContext).toplistItems;
 
-  const toplistItemsArr = toplist.map((item) => {
+  const toplistItemsArr = toplist.map(({ id, title, review, img }) => {
     return (
       <>
         <ToplistCard
-          key={item.id}
-          title={item.title}
-          imdbID={item.id}
-          data={item.review}
-          img={item.image}
-          id={item.id}
+          key={id}
+          title={title}
+          imdbID={id}
+          data={review}
+          img={img}
+          id={id}
         />
       </>
     );
   });
 
   return (
-    <html>
+    <>
       <Head>
         <title>Toplist</title>
       </Head>
-      <body>
-        <div className="toplist-item-container">
-          <div className="toplist-header">
-            <h1>Your current toplist:</h1>
-            <Sorting items={toplistItemsArr}></Sorting>
-          </div>
-          <div className="toplist-items">{toplistItemsArr}</div>
+
+      <section className="toplist-item-container">
+        <div className="toplist-header">
+          <h1>Your current toplist:</h1>
+          <Sorting items={toplistItemsArr} />
         </div>
-      </body>
-    </html>
+        <div className="toplist-items">{toplistItemsArr}</div>
+      </section>
+    </>
   );
 }

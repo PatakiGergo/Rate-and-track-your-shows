@@ -3,7 +3,7 @@ import { ToplistContext } from "@/context/toplist-context";
 import { WatchlistContext } from "@/context/watchlist-context";
 import { TracklistContext } from "@/context/tracklist-context";
 
-export default function RemoveButton(props) {
+export default function RemoveButton({ type, id }) {
   const [state, dispatch] = useReducer(reducer, { type: "asdasd" });
   const toplistContext = useContext(ToplistContext);
   const watchlistContext = useContext(WatchlistContext);
@@ -13,20 +13,19 @@ export default function RemoveButton(props) {
   function reducer(state, action) {
     switch (action.type) {
       case "tracklist-delete":
-        tracklistContext.remove(props.id);
+        tracklistContext.remove(id);
         break;
       case "watchlist-delete":
-        watchlistContext.remove(props.id);
+        watchlistContext.remove(id);
         break;
       case "toplist-delete":
-        toplistContext.remove(props.id);
-
+        toplistContext.remove(id);
         break;
     }
   }
 
   function handleClick() {
-    reducer("asd", { type: props.type });
+    reducer("asd", { type });
   }
 
   return (

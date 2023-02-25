@@ -1,30 +1,31 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import AddToTracklist from "../Buttons/AddToTracklist";
 import AddToWatchlistButton from "../Buttons/AddToWatchlist";
 import AddToToplistButton from "../Buttons/AddToToplist";
 
-export default function HotCard(props) {
+export default function HotCard({ title, image, description, id }) {
   return (
     <div className="hot-card-container">
-      <h1>{props.title} </h1>
+      <h1>{title} </h1>
       <div className="hot-picture">
-        <img src={props.image} alt={`Image of ${props.title} `} />
+        <img src={image} alt={`Image of ${title} `} />
       </div>
       <div className="hot-description">
-        <p>{props.description}</p>
+        <p>{description}</p>
       </div>
       <div className="hot-card-buttons">
         <AddToToplistButton
-          name={props.title}
-          id={props.id}
-          image={props.image}
+          name={title}
+          id={id}
+          image={image}
         ></AddToToplistButton>
-        <AddToTracklist name={props.title}></AddToTracklist>
+        <AddToTracklist name={title}></AddToTracklist>
         <AddToWatchlistButton
-          name={props.title}
-          imdbId={props.id}
-          img={props.image}
-          description={props.description}
+          name={title}
+          imdbId={id}
+          img={image}
+          description={description}
         ></AddToWatchlistButton>
       </div>
     </div>

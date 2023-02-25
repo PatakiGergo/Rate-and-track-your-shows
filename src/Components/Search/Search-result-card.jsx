@@ -1,13 +1,18 @@
-import React, { useContext, useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import React from "react";
 
 import AddToWatchlistButton from "../Buttons/AddToWatchlist";
 import AddToToplistButton from "../Buttons/AddToToplist";
 import AddToTracklist from "../Buttons/AddToTracklist";
 import IMDBCard from "../UI/IMDBCard";
 
-export default function SearchResultCard(props) {
-  const description = props.description;
-
+export default function SearchResultCard({
+  description,
+  name,
+  imdbID,
+  image,
+  genres,
+}) {
   //formatting text
   const text = () => {
     const wrapper = document.createElement("div");
@@ -21,32 +26,29 @@ export default function SearchResultCard(props) {
   return (
     <>
       <div className="searchcard-container">
-        <IMDBCard ImdbID={props.imdbID} title={props.name}></IMDBCard>
+        <IMDBCard ImdbID={imdbID} title={name}></IMDBCard>
         <div className="container-card">
-          <img src={props.image} alt={`Image of ${props.name}`} />
+          <img src={image} alt={`Image of ${name}`} />
 
           <div>
-            <h1>{props.name}</h1>
-            <p>{props.genres} </p>
+            <h1>{name}</h1>
+            <p>{genres} </p>
             <div className="description">
               <p>{text()}</p>
             </div>
 
             <div className="searchcard-button-div">
               <AddToWatchlistButton
-                name={props.name}
-                imdbID={props.imdbID}
-                image={props.image}
+                name={name}
+                imdbID={imdbID}
+                image={image}
                 description={description}
               ></AddToWatchlistButton>
-              <AddToTracklist
-                show={props.name}
-                name={props.name}
-              ></AddToTracklist>
+              <AddToTracklist show={name} name={name}></AddToTracklist>
               <AddToToplistButton
-                name={props.name}
-                id={props.imdbID}
-                img={props.image}
+                name={name}
+                id={imdbID}
+                img={image}
               ></AddToToplistButton>
             </div>
           </div>

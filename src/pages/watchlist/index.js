@@ -7,26 +7,24 @@ import Head from "next/head";
 export default function Watchlist() {
   const watchlist = useContext(WatchlistContext).watchlistItems;
 
-  const watchListItems = watchlist.map((item) => {
+  const watchListItems = watchlist.map(({ id, title, image, description }) => {
     return (
       <WatchlistCard
-        key={item.id}
-        title={item.title}
-        imdbID={item.id}
-        image={item.image}
-        description={item.description}
+        key={id}
+        title={title}
+        imdbID={id}
+        image={image}
+        description={description}
       />
     );
   });
 
   return (
-    <html lang="en">
+    <>
       <Head>
         <title>Watchlist</title>
       </Head>
-      <body>
-        <div>{watchListItems}</div>
-      </body>
-    </html>
+      <section>{watchListItems}</section>
+    </>
   );
 }
