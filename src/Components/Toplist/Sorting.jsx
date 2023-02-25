@@ -10,19 +10,21 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 
 export default function BasicSelect() {
   let toplistItemsArr = React.useContext(ToplistContext);
-
   const [sorting, setSorting] = React.useState("");
 
+  //setting to either lowtohigh or hightolow
   const handleChange = (event) => {
-    setSorting(event.target.value);
+    const sortingType = event.target.value;
+    setSorting(sortingType);
   };
 
+  //utilizes sorting in context
   useEffect(() => {
     toplistItemsArr.sortItems(sorting);
   }, [sorting]);
 
   return (
-    <Box >
+    <Box>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-simple-select-label">Sort by:</InputLabel>
         <Select

@@ -5,7 +5,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import Link from "next/link";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -22,7 +23,11 @@ function Copyright(props) {
       {...props}
     >
       {"App made by "}
-      <Link color="inherit" href="https://github.com/PatakiGergo" target={"_blank"}>
+      <Link
+        color="inherit"
+        href="https://github.com/PatakiGergo"
+        target={"_blank"}
+      >
         Github/PatakiGergo
       </Link>{" "}
       {new Date().getFullYear()}
@@ -123,24 +128,22 @@ const Login = (props) => {
             <Grid container>
               <Grid item xs>
                 <Link
-                  href="#"
+                  href="./reset-password"
                   variant="body2"
                   sx={{
                     color: "white",
                   }}
-                  onClick={props.forgottenPW}
                 >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
                 <Link
-                  href="#"
+                  href="./sign-up"
                   variant="body2"
                   sx={{
                     color: "white",
                   }}
-                  onClick={props.register}
                 >
                   {"Don't have an account? Sign Up"}
                 </Link>

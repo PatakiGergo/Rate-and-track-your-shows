@@ -20,7 +20,7 @@ export default function Watchlist() {
   });
 
   return (
-    <html>
+    <html lang="en">
       <Head>
         <title>Watchlist</title>
       </Head>

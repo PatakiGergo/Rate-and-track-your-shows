@@ -10,7 +10,7 @@ export const WatchlistContext = React.createContext({
 export default (props) => {
   const [watchlist, setWatchlist] = useState([{ title: "asd", id: 12 }]);
 
-  //adding movies to watchlist with chenking if it's already there or not
+  //adding movies to watchlist with, chenking if it's already there or not
   function addToWatchlist(name, id, image, description) {
     setWatchlist((current) => {
       if (current.some((item) => item.title === name)) {

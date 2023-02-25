@@ -9,6 +9,7 @@ export default function RemoveButton(props) {
   const watchlistContext = useContext(WatchlistContext);
   const tracklistContext = useContext(TracklistContext);
 
+  //checking the removals type
   function reducer(state, action) {
     switch (action.type) {
       case "tracklist-delete":
@@ -19,7 +20,7 @@ export default function RemoveButton(props) {
         break;
       case "toplist-delete":
         toplistContext.remove(props.id);
-       
+
         break;
     }
   }

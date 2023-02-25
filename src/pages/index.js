@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Login from "@/Components/Login";
-import Register from "@/Components/Register";
-import ForgottenPassword from "@/Components/ForgottenPassword";
+import Login from "@/Components/User/Login";
+import Register from "@/Components/User/Register";
+import ForgottenPassword from "@/Components/User/ForgottenPassword";
 
 export default function Dashboard(props) {
   const [register, setRegister] = useState(false);

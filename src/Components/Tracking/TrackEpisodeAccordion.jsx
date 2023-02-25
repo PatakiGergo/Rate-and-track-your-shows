@@ -10,7 +10,6 @@ export default function TrackEpisodeAccordion(props) {
   const tracklistContext = useContext(TracklistContext);
   const summary = props.summary;
 
-  //hookba majd!!
   const episodeSummary = () => {
     const wrapper = document.createElement("div");
     wrapper.innerHTML = summary;
@@ -20,8 +19,6 @@ export default function TrackEpisodeAccordion(props) {
     return <div>{text}</div>;
   };
   //code duplicationt majd fixálni
-
-  const episode = "asd";
 
   function handleClick(e) {
     props.checkmarkHandler(props.id);

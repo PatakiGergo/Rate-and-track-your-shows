@@ -8,6 +8,7 @@ import IMDBCard from "../UI/IMDBCard";
 export default function SearchResultCard(props) {
   const description = props.description;
 
+  //formatting text
   const text = () => {
     const wrapper = document.createElement("div");
     wrapper.innerHTML = description;
@@ -36,7 +37,7 @@ export default function SearchResultCard(props) {
                 name={props.name}
                 imdbID={props.imdbID}
                 image={props.image}
-                description={props.description}
+                description={description}
               ></AddToWatchlistButton>
               <AddToTracklist
                 show={props.name}

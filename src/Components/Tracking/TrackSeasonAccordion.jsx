@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -8,101 +8,95 @@ import { TracklistContext } from "@/context/tracklist-context";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
 export default function TrackSeasonAccordion(props) {
-  const episodes = props.episodes;
   const tracklistContext = useContext(TracklistContext);
-
+  const trackedShows = tracklistContext.tracklistItems;
+  const episodes = props.episodes;
   const season = props.season;
+  const title = props.title;
+  const wholeSeries = props.wholeSeries;
+  const seen = props.seen;
+
+  const [seasonSeen, setWholeSeasonSeen] = useState(seen?.includes(season));
+
   const episodeAccordion = [
     <TrackEpisodeAccordion season={props.season} key={"placeholder"} />,
   ];
 
-  const seasonEpisodes = [];
-  const wholeSeries = props.wholeSeries;
+  function findShow(title) {
+    const show = trackedShows.find((show) => show.title === title);
+    return show;
+  }
 
+  //handling checkmark on episode accordion
   function episodeCheckmarkHandler(id) {
-    tracklistContext.tracklistItems.map((show) => {
-      if (show.title === props.title) {
-        show.episodes.map((episode) => {
-          if (episode.id === id) {
-            tracklistContext.handleSeen(id, episode.name, show.title);
-          }
-        });
+    const show = findShow(title);
+    const episodes = show.episodes;
+    episodes.forEach((episode) => {
+      if (episode.id === id) {
+        tracklistContext.handleSeen(id, episode.name, show.title);
+        return;
       }
     });
   }
 
+  //handling checkmark on season accordion
   function seasonCheckmarkHandler(id) {
-    tracklistContext.tracklistItems.map((show) => {
-      if (show.title === props.title) {
-        show.episodes.map((episode) => {
-          if (episode.id === id) {
-            tracklistContext.handleSeenSeason(
-              id,
-              episode.name,
-              show.title,
-              props.season
-            );
-          }
-        });
+    const show = findShow(title);
+    const episodes = show.episodes;
+    episodes.forEach((episode) => {
+      if (episode.id === id) {
+        tracklistContext.handleSeenSeason(
+          id,
+          episode.name,
+          show.title,
+          props.season
+        );
+        return;
       }
     });
   }
-
-  const [seasonSeen, setWholeSeasonSeen] = useState(
-    props.seen?.includes(season)
-  );
 
   function setSeasonSeen(e) {
+    e.stopPropagation();
     if (seasonSeen) {
-      e.stopPropagation();
-
-      tracklistContext.tracklistItems.map((show) => {
-        if (show.title === props.title) {
-          show.episodes.map((episode) => {
-            if (episode.season === props.season) {
-              setWholeSeasonSeen(false);
-              //ide contextes method
-
-              tracklistContext.handleSeasonUndo(
-                episode.id,
-                episode.name,
-                show.title,
-                episode.season
-              );
-            }
-          });
+      const show = findShow(title);
+      show.episodes.forEach((episode) => {
+        if (episode.season === season) {
+          setWholeSeasonSeen(false);
+          tracklistContext.handleSeasonUndo(
+            episode.id,
+            episode.name,
+            show.title,
+            episode.season
+          );
         }
       });
     } else {
-      e.stopPropagation();
-      tracklistContext.tracklistItems.map((show) => {
-        if (show.title === props.title) {
-          show.episodes.map((episode) => {
-            if (episode.season === props.season) {
-              seasonCheckmarkHandler(episode.id, e);
-              setWholeSeasonSeen(!seasonSeen);
-            }
-          });
+      const show = findShow(title);
+      show.episodes.forEach((episode) => {
+        if (episode.season === season) {
+          seasonCheckmarkHandler(episode.id, e);
+          setWholeSeasonSeen(!seasonSeen);
         }
       });
     }
   }
 
-  episodes.forEach((episode) => {
+  const seasonEpisodes = episodes.map((episode) => {
     if (episode.season === season) {
-      seasonEpisodes.push(
+      return (
         <TrackEpisodeAccordion
-          season={props.season}
+          season={season}
           key={episode.id}
           episode={episode.name}
           summary={episode.summary}
           data={episode}
           wholeSeries={wholeSeries}
-          title={props.title}
+          title={title}
           checkmarkHandler={episodeCheckmarkHandler}
           id={episode.id}
           seasonSeen={seasonSeen}
-          seen={props.seen}
+          seen={seen}
           seasonSetter={setSeasonSeen}
         />
       );
@@ -125,7 +119,7 @@ export default function TrackSeasonAccordion(props) {
         >
           <input type="checkbox" onClick={setSeasonSeen} checked={seasonSeen} />
           <Typography>
-            {props.title} Season {props.season} accordion
+            {title} Season {season} accordion
           </Typography>
         </AccordionSummary>
         <AccordionDetails>

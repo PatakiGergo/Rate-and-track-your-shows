@@ -4,29 +4,33 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 export default function ProgressBar(props) {
   const [finished, setFinished] = useState(false);
+  const progress = Math.floor(props.progress * 100);
+  const title = props.title;
 
+  //Whenever the user finishes it sends an alert
   useEffect(() => {
-    if (props.progress === 1) {
+    if (progress === 100) {
       setFinished(true);
       setTimeout(() => {
         setFinished(false);
       }, 3000);
     }
-  }, [props.progress]);
+  }, [progress]);
+
   return (
     <>
       {finished && (
         <UserAlert
           type={"success"}
-          message={`You finished watching ${props.title} you may want to add it to your toplist`}
+          message={`You finished watching ${title} you may want to add it to your toplist`}
         ></UserAlert>
       )}
       <div className="bar">
-        <h1>Progress: {Math.floor(props.progress * 100)} %</h1>
+        <h1>Progress: {progress} %</h1>
         <LinearProgress
           color={"secondary"}
           variant="determinate"
-          value={Math.floor(props.progress * 100)}
+          value={progress}
           sx={{
             height: "10px",
             backgroundColor: "white",
