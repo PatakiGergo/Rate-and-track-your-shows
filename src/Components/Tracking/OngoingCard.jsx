@@ -12,6 +12,7 @@ export default function OngoingCard({
   imdbID,
   seasonsSeen,
   img,
+  seenEpisodes,
 }) {
   //Card that contains the season and episode accordions
   const tracklist = useContext(TracklistContext);
@@ -34,6 +35,7 @@ export default function OngoingCard({
         episodes={episodes}
         wholeSeries={episodes}
         seen={seasonsSeen}
+        seenEpisodes={seenEpisodes}
       />
     );
     if (i === SEASON_NUMBER) {
@@ -41,12 +43,14 @@ export default function OngoingCard({
     }
   }
 
+ 
+
   function calculateProgress() {
     let seenNumber = 0;
     tracklist.tracklistItems.forEach((show) => {
       if (show.title === title) {
         show.episodes.map((episode) => {
-          if (tracklist.seenEpisodes.includes(episode)) {
+          if (tracklist?.seenEpisodes.includes(episode)) {
             seenNumber = seenNumber + 1;
           }
         });
@@ -54,6 +58,8 @@ export default function OngoingCard({
     });
     return seenNumber / numberOfEpisodes;
   }
+
+
 
   return (
     <section className="ongoing">

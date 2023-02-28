@@ -15,6 +15,17 @@ export const TracklistContext = React.createContext({
 //Items on the tracklist
 // eslint-disable-next-line react/display-name, import/no-anonymous-default-export
 export default (props) => {
+  //Seen Episodes stored in objects
+  const [seenEpisodes, setSeenEpisodes] = useState([
+    {
+      id: "idexample",
+      url: "example",
+      name: "placeholder",
+      season: 4,
+      number: 5,
+    },
+  ]);
+
   const [tracklist, setTracklist] = useState([
     {
       title: "asd",
@@ -28,18 +39,8 @@ export default (props) => {
           seen: false,
         },
       ],
-      dataOfUserProgress: 5,
-    },
-  ]);
-
-  //Seen Episodes stored in objects
-  const [seenEpisodes, setSeenEpisodes] = useState([
-    {
-      id: "idexample",
-      url: "example",
-      name: "placeholder",
-      season: 4,
-      number: 5,
+      dataOfUserProgress: 0,
+      seenEpisodes: seenEpisodes,
     },
   ]);
 
@@ -53,6 +54,7 @@ export default (props) => {
       dataOfUserProgress,
       seasonsSeen: [],
     };
+    removeMovieFromTracklist("idexample");
     setTracklist((current) => {
       if (current.some(({ title }) => title === name)) {
         return [...current];
@@ -157,11 +159,10 @@ export default (props) => {
     const tracklistItem = JSON.parse(localStorage.getItem("tracklist"));
     const seenEpisodeItem = JSON.parse(localStorage.getItem("seenEpisodes"));
 
-    if (tracklistItem[0]?.title !== "asd") {
+    if (tracklistItem !== null && tracklistItem[0]?.title !== "asd") {
       console.log("got item ez az", tracklistItem);
-
-      setTracklist(tracklistItem);
       setSeenEpisodes(seenEpisodeItem);
+      setTracklist(tracklistItem);
     }
   }, []);
 
@@ -169,8 +170,6 @@ export default (props) => {
     localStorage.setItem("tracklist", JSON.stringify(tracklist));
     localStorage.setItem("seenEpisodes", JSON.stringify(seenEpisodes));
   }, [tracklist, seenEpisodes]);
-
-
 
   return (
     <TracklistContext.Provider

@@ -7,7 +7,14 @@ import TrackEpisodeAccordion from "./TrackEpisodeAccordion";
 import { TracklistContext } from "@/context/tracklist-context";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
-function TrackSeasonAccordion({ episodes, season, title, wholeSeries, seen }) {
+function TrackSeasonAccordion({
+  episodes,
+  season,
+  title,
+  wholeSeries,
+  seen,
+  seenEpisodes,
+}) {
   const tracklistContext = useContext(TracklistContext);
   const trackedShows = tracklistContext.tracklistItems;
 
@@ -88,6 +95,7 @@ function TrackSeasonAccordion({ episodes, season, title, wholeSeries, seen }) {
           seasonSeen={seasonSeen}
           seen={seen}
           seasonSetter={setSeasonSeen}
+          seenEpisodes={seenEpisodes}
         />
       );
     }

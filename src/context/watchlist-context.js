@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 export const WatchlistContext = React.createContext({
   watchlistItems: [],
@@ -8,7 +9,9 @@ export const WatchlistContext = React.createContext({
 
 // eslint-disable-next-line react/display-name, import/no-anonymous-default-export
 export default (props) => {
-  const [watchlist, setWatchlist] = useState([{ title: "asd", id: 12 }]);
+  const [watchlist, setWatchlist] = useLocalStorageState("watchlistContext", {
+    defaultValue: [],
+  });
 
   //adding movies to watchlist with, chenking if it's already there or not
   function addToWatchlist(name, id, image, description) {
@@ -16,7 +19,12 @@ export default (props) => {
       if (current.some(({ title }) => title === name)) {
         return [...current];
       } else {
-        return [...current, { title: name, id, image, description }];
+        const updatedWatchlist = [
+          ...current,
+          { title: name, id, image, description },
+        ];
+
+        return updatedWatchlist;
       }
     });
   }
@@ -24,20 +32,11 @@ export default (props) => {
   //removing movies from watchlist
   function removeMovie(id) {
     setWatchlist((current) => {
-      return current.filter((item) => item.id !== id);
+      const updatedWatchlist = current.filter((item) => item.id !== id);
+
+      return updatedWatchlist;
     });
   }
-
-  useEffect(() => {
-    const watchlistItem = JSON.parse(localStorage.getItem("watchlist"));
-    if (watchlistItems[0]?.title === "asd") {
-      setWatchlist(watchlistItem);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
-  }, [watchlist]);
 
   return (
     <WatchlistContext.Provider

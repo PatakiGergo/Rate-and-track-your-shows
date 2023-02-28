@@ -16,6 +16,7 @@
     "@mui/material": "^5.11.7",
     "@next/font": "^13.1.6",
     "@reduxjs/toolkit": "^1.9.2",
+    "@rehooks/local-storage": "^2.4.4",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "next": "13.1.6",

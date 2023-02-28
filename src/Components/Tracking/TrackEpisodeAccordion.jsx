@@ -15,8 +15,17 @@ function TrackEpisodeAccordion({
   seasonSeen,
   checkmarkHandler,
   episode,
+  seenEpisodes,
 }) {
   const tracklistContext = useContext(TracklistContext);
+
+  const [seenEpisodeItem, setSeenEpisodeItem] = useState([]);
+
+  useEffect(() => {
+    const seenEpisodeItem = JSON.parse(localStorage.getItem("seenEpisodes"));
+    setSeenEpisodeItem(seenEpisodeItem);
+    console.log("seenEpisodeItem", seenEpisodeItem);
+  }, [episode]);
 
   const episodeSummary = () => {
     const wrapper = document.createElement("div");
@@ -29,8 +38,28 @@ function TrackEpisodeAccordion({
   //code duplicationt majd fixálni
 
   function handleClick(e) {
+    setSeenEpisodeItem(seenEpisodeItem.filter((item) => item === data));
     checkmarkHandler(id);
     e.stopPropagation();
+  }
+
+  console.log("seenEpisodeItem", seenEpisodeItem, "data", data);
+  console.log(
+    "datainklúúúd",
+    seenEpisodeItem.includes((item) => item.id === data.id)
+  );
+
+  function checking(how) {
+    let bool = false;
+    seenEpisodeItem.forEach((item) => {
+      if (item.id === data.id) {
+        bool = true;
+      }
+    });
+    if (tracklistContext.seenEpisodes.includes(data)) {
+      bool = true;
+    }
+    return bool;
   }
 
   return (
@@ -38,7 +67,7 @@ function TrackEpisodeAccordion({
       <Accordion
         sx={{
           backgroundColor:
-            tracklistContext.seenEpisodes.includes(data) || seasonSeen
+            tracklistContext.seenEpisodes.includes(data) || checking()
               ? "green"
               : "white",
         }}
@@ -57,9 +86,7 @@ function TrackEpisodeAccordion({
           <input
             type="checkbox"
             onClick={handleClick}
-            checked={
-              seasonSeen ? true : tracklistContext.seenEpisodes.includes(data)
-            }
+            checked={checking()}
             disabled={seen?.includes(season)}
           />
           <Typography>{episode}</Typography>

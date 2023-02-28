@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-
 import { TracklistContext } from "@/context/tracklist-context";
 import OngoingCard from "@/Components/Tracking/OngoingCard";
 import Head from "next/head";
 
 export default function Tracklist() {
   const tracklist = useContext(TracklistContext).tracklistItems;
+  const seenEpisodes = useContext(TracklistContext).seenEpisodes;
+
+ 
 
   const tracklistItems = tracklist.map(
     ({ title, id, episodes, img, seasonsSeen }) => {
@@ -17,6 +19,7 @@ export default function Tracklist() {
           episodes={episodes}
           img={img}
           seasonsSeen={seasonsSeen}
+          seenEpisodes={seenEpisodes}
         />
       );
     }
